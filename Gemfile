@@ -16,7 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.0.0'
 
 # db driver for mongodb
-gem "mongoid"
+gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
 gem 'bson_ext'
 
