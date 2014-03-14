@@ -22,28 +22,45 @@ class Tree
     construct_history << self
   end
 
-  def construct_history
-    # self.history << self
-    if !self.parent_tree.nil?
-      [ self.parent_tree.construct_history ]
+
+  def get_history
+    history = []
+    self.construct_history do |node|
+      history << node
     end
-    self.history
+    history 
   end
 
-  def construct_history(id)
-    if self.parent_tree.nil?
-      parent_id = self.parent_tree.id
-      self.history << 
-      construct_history(parent_id)
-    end
+  def construct_history(&block)
+    yield self
+    if !self.parent_tree.nil?
+      self.parent_tree.construct_history(&block)
+    end  
+  end
+  
 
-
-    #construct_history(tree.id)
 
 end
 
 
 =begin
+
+def get_history
+history = []
+self.construct_history do |node|
+  history << node
+end
+history 
+end
+
+construct_history(&block)
+  if !self.parent.nil?
+    yield self.parent.construct_history(&block)
+  else 
+    yield self
+  end  
+end
+
  
  fields: id (int), content (string), user_id (int), children (array)
  

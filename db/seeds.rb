@@ -32,8 +32,11 @@ tree_five.save
 
 # tree_two.save
 
-# tree_six = Tree.create(:content => "who lived in a large castle")
-# tree_seven = Tree.create(:content => "who has an ogre friend named shrek")
+tree_six = tree_four.child_trees.build(:content => "But the jedi has one last stand")
+tree_seven = tree_six.child_trees.build(:content => "We'll see what happens...")
+
+tree_six.save
+tree_seven.save
 
 # tree_three.children << tree_six
 # tree_three.children << tree_seven
