@@ -2,8 +2,9 @@ require 'pry'
 
 class Tree
   include Mongoid::Document
+  include Mongoid::Tree
 
-  recursively_embeds_many
+#  recursively_embeds_many
   after_initialize :initialize_history
 
   field :user_id, type: Integer
@@ -17,7 +18,6 @@ class Tree
   end
 
   def find_node_by_id
-
   end
 
 
@@ -31,8 +31,8 @@ class Tree
 
   def traverse_parents(&block)
     yield self
-    if !self.parent_tree.nil?
-      self.parent_tree.traverse_parents(&block)
+    if !self.parent.nil?
+      self.parent.traverse_parents(&block)
     end  
   end
 
@@ -50,14 +50,14 @@ class Tree
     tree = Tree.first
     goal = nil
     queue = [] 
-    Tree.first.child_trees.each { |child| queue << child }
+    Tree.first.children.each { |child| queue << child }
 
     while queue.size > 0
       queue.each do |child|
         if child._id == id 
           goal = child
         elsif child.has_children?
-          child.child_trees.each { |child| queue << child }
+          child.children.each { |child| queue << child }
         end
         queue.shift 
       end
@@ -66,7 +66,7 @@ class Tree
   end
 
   def has_children?
-    !!self.child_trees
+    !!self.children
   end
   
 

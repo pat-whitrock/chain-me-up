@@ -22,6 +22,8 @@ gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
 gem 'mongoid-rspec'
 
+gem 'mongoid-tree', :require => 'mongoid/tree'
+
 gem 'pry'
 
 gem 'bson'
