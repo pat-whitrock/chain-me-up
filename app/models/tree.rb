@@ -18,24 +18,29 @@ class Tree
 
   end
 
-  def final_history
-    construct_history << self
-  end
-
 
   def get_history
     history = []
-    self.construct_history do |node|
+    self.traverse_parents do |node|
       history << node
     end
     history 
   end
 
-  def construct_history(&block)
+  def traverse_parents(&block)
     yield self
     if !self.parent_tree.nil?
-      self.parent_tree.construct_history(&block)
+      self.parent_tree.traverse_parents(&block)
     end  
+  end
+
+  def construct_history
+    history_array = get_history
+    story = ""
+    history_array.each do |history|
+      story << history.content
+    end
+    story
   end
   
 
