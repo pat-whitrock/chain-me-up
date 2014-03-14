@@ -1,3 +1,5 @@
+require 'pry'
+
 class Tree
   include Mongoid::Document
 
@@ -35,67 +37,38 @@ class Tree
   end
 
   def construct_history
-    history_array = get_history
+    history_array = get_history.reverse
     story = ""
     history_array.each do |history|
       story << history.content
     end
     story
   end
+
+  def self.find_by_id(tree_id)
+    id = BSON::ObjectId.from_string(tree_id)
+    tree = Tree.first
+    goal = nil
+    queue = [] 
+    Tree.first.child_trees.each { |child| queue << child }
+
+    while queue.size > 0
+      queue.each do |child|
+        if child._id == id 
+          goal = child
+        elsif child.has_children?
+          child.child_trees.each { |child| queue << child }
+        end
+        queue.shift 
+      end
+    end
+    goal 
+  end
+
+  def has_children?
+    !!self.child_trees
+  end
   
 
 
 end
-
-
-=begin
-
-def get_history
-history = []
-self.construct_history do |node|
-  history << node
-end
-history 
-end
-
-construct_history(&block)
-  if !self.parent.nil?
-    yield self.parent.construct_history(&block)
-  else 
-    yield self
-  end  
-end
-
- 
- fields: id (int), content (string), user_id (int), children (array)
- 
- each tree should have a children array of trees
-
-  # get content => 
- #get_history => Helper for get_content, climbs up through a parents, stitch together content
-
- returns 
-
- history = {
-  part 1 => {
-    :content => ""
-    :id => 23
-  }
-  part 2 => {
-    :content => ""
-    :id => 23
-  } 
-  part 3 => {
-    :content => ""
-    :id => 23
-  }     
-
-  history.inject do |child, hash|
-   child.content 
-  end
-
-
- }
-
-
-=end 

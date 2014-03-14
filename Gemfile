@@ -22,8 +22,11 @@ gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
 gem 'mongoid-rspec'
 
+gem 'pry'
 
+gem 'bson'
 
+##<Tree _id: 53232f1747656f2eb0030000, user_id: nil, content: "the sith lords were taking over"> 
 gem 'bson_ext'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
