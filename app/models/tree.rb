@@ -3,7 +3,6 @@ require 'benchmark'
 class Tree
   include Mongoid::Document
 
-
   recursively_embeds_many
 
   field :user_id, type: Integer
@@ -16,6 +15,10 @@ class Tree
     end  
   end
 
+  def history 
+    @history ||= construct_history 
+  end
+
   def construct_history
     history_array = get_history.reverse
     story = ""
@@ -23,6 +26,10 @@ class Tree
       story << history.content + " "
     end
     story
+  end
+
+  def reduce_history 
+
   end
 
   def self.find_by_id(tree_id)
