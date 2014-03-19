@@ -4,7 +4,6 @@ class Tree
   include Mongoid::Document
 
   recursively_embeds_many
-  after_initialize :initialize_history
 
   field :user_id, type: Integer
   field :content, type: String
@@ -29,7 +28,7 @@ class Tree
     history_array = get_history.reverse
     story = ""
     history_array.each do |history|
-      story << history.content
+      story << history.content + " "
     end
     story
   end

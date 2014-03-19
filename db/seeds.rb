@@ -21,7 +21,7 @@ def add_children(number, tree)
   end  
 end
 
-add_children(12, tree_one)
+add_children(8, tree_one)
 
 
 
