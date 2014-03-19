@@ -9,14 +9,10 @@ class Tree
 
 
   def construct_history
-    history_array = ancestors_and_self
-    story = ""
-    history_array.each do |history|
-      story << history.content + " "
-    end
-    story
   end
 
-
-
+  def has_children?
+    !!self.children
+  end
+  
 end

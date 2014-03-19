@@ -6,6 +6,24 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+require 'benchmark'
+
+@tree = Tree.create(:content => "A long long time ago")
+
+def add_children(number, tree)
+  t1 = Tree.new(:content => "Something happened! #{number}")
+  t2 = Tree.new(:content => "Something happened! #{number}")
+  tree.children << t1
+  tree.children << t2  
+  tree.save
+  if number != 0
+    add_children(number - 1, t1)
+    add_children(number - 1, t2)
+  end
+end
+
+add_children(12, @tree)
+
 tree_one = Tree.new(:content => "A long long time ago")
 
 tree_two = Tree.new(:content => "in a galexy far far away")
@@ -24,7 +42,6 @@ tree_five = Tree.new(:content => "Luke slayed a wombat")
 
 tree_two.children << tree_four
 tree_two.children << tree_five
-
 
 tree_six = Tree.new(:content => "But the jedi has one last stand")
 tree_seven = Tree.new(:content => "We'll see what happens...")
