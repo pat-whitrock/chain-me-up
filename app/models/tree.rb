@@ -1,4 +1,4 @@
-require 'pry'
+require 'benchmark'
 
 class Tree
   include Mongoid::Document
@@ -8,17 +8,6 @@ class Tree
 
   field :user_id, type: Integer
   field :content, type: String
-
-  attr_accessor :history
-
-
-  def initialize_history
-    @history = []
-  end
-
-  def find_node_by_id
-
-  end
 
 
   def get_history
@@ -50,19 +39,22 @@ class Tree
     tree = Tree.first
     goal = nil
     queue = [] 
+    side_pile = []
     Tree.first.child_trees.each { |child| queue << child }
-
     while queue.size > 0
-      queue.each do |child|
-        if child._id == id 
-          goal = child
-        elsif child.has_children?
-          child.child_trees.each { |child| queue << child }
-        end
-        queue.shift 
+      tree = queue.shift
+      if tree._id == id 
+        goal = tree
+        break
+      elsif tree.has_children?
+        tree.child_trees.each { |child| queue << child }
       end
     end
     goal 
+  end
+
+  def get_all_children
+    Hash(self.attributes)
   end
 
   def has_children?

@@ -15,14 +15,13 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'rspec-rails'
+
 
 # db driver for mongodb
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
 
-gem 'mongoid-rspec'
 
-gem 'pry'
+
 
 gem 'bson'
 
@@ -44,6 +43,13 @@ gem 'jbuilder', '~> 1.2'
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
+end
+
+group :development, :test do
+  # bundle exec rake doc:rails generates the API under doc/api.
+  gem 'rspec-rails'
+  gem 'mongoid-rspec'
+  gem 'pry'
 end
 
 # Use ActiveModel has_secure_password
