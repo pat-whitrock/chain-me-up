@@ -7,6 +7,7 @@ class Tree
 
   field :user_id, type: Integer
   field :content, type: String
+  field :title, type: String
 
   def traverse_parents(&block)
     yield self
@@ -19,26 +20,32 @@ class Tree
     @history ||= construct_history 
   end
 
+  def get_history
+    history = []
+    self.traverse_parents do |node|
+      history << node
+    end
+    history
+  end
+
   def construct_history
     history_array = get_history.reverse
     story = ""
-    history_array.each do |history|
-      story << history.content + " "
+    title = nil
+    history_array.each_with_index do |branch, index|
+      story << branch.content + " "
+      if index == 0
+        title = branch.title
+      end
     end
-    story
+    {:title => title, :content => story.strip}
   end
 
-  def reduce_history 
-
-  end
-
-  def self.find_by_id(tree_id)
-    id = BSON::ObjectId.from_string(tree_id)
-    tree = Tree.first
+  def find_branch(branch_id)
+    id = BSON::ObjectId.from_string(branch_id)
     goal = nil
     queue = [] 
-    side_pile = []
-    Tree.first.child_trees.each { |child| queue << child }
+    child_trees.each { |child| queue << child }
     while queue.size > 0
       tree = queue.shift
       if tree._id == id 

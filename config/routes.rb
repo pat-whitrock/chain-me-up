@@ -1,10 +1,22 @@
 ChainMeUp::Application.routes.draw do
 
+  root 'trees#index'
+
+  get '/trees/new' => 'trees#new'
+
+  post '/trees' => 'trees#create'
+
   get '/trees' => 'trees#index'
 
   get '/trees/:id' => 'trees#show'
 
   patch '/trees/:id' => 'trees#update'
+
+
+
+  get '/trees/:id/branch/:branch_id/new' => 'branches#new'
+
+  post '/trees/:id/branch/:branch_id' => 'branches#create' 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

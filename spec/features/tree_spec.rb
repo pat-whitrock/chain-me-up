@@ -1,6 +1,5 @@
 require_relative '../spec_helper'
 
-
 describe "the create tree page" do
 
   it "allows the user to create a tree from scratch" do
