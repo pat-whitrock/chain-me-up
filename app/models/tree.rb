@@ -63,7 +63,7 @@ class Tree
   end
 
   def has_children?
-    !!self.children
+    !!self.child_trees
   end
   
 end

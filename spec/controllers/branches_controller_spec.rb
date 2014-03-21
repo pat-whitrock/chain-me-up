@@ -23,4 +23,6 @@ describe BranchesController do
       expect(child.child_trees[0].content).to eq("Example content")
     end
   end
+
+
 end

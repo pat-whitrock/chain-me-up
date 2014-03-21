@@ -1,2 +1,19 @@
-<%= @branch.history %>
+<h3><%= @branch.history[:title] if @branch %></h3>
+<p><%= @branch.history[:content] if @branch %></p>
+
+<%= form_for @new_branch, :url => create_branch_path(@tree, @branch) do |f| %>
+
+  <%= f.label :content %><br />
+  <%= f.text_area :content %><br />
+  <%= f.submit "Create Branch"  %>
+
+<% end %>
+
+  <ul> 
+    <% @branch.child_trees.each do |child|  %>
+      <li><%= link_to child.content, new_branch_path(@tree, child) %></li>
+    <% end %>
+  </ul>
+
+
 

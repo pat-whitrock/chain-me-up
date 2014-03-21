@@ -14,6 +14,7 @@ class TreesController < ApplicationController
   end
 
   def index
+
     @trees = Tree.all
   end
 
