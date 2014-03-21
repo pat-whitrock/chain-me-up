@@ -4,6 +4,7 @@ class Tree
   include Mongoid::Document
 
   recursively_embeds_many
+  belongs_to :user 
 
   field :user_id, type: Integer
   field :content, type: String

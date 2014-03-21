@@ -1,5 +1,6 @@
 ChainMeUp::Application.routes.draw do
 
+  devise_for :users
   root 'trees#index'
 
   get '/trees/new' => 'trees#new'
