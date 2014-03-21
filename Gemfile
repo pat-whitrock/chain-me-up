@@ -15,24 +15,26 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
-gem 'capybara'
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem "selenium-webdriver"
+  gem 'rack-test'
+  gem 'factory_girl_rails'
+  gem "database_cleaner"
+  gem 'pry'
+  gem 'mongoid-rspec'
+end
 
-gem 'rspec-rails'
-
-gem 'rack-test'
+group :test do
+  gem "timecop"
+  gem "rack_session_access"
+end
 
 # db driver for mongodb
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
-
-
 gem 'mongoid-tree', :require => 'mongoid/tree'
-
-
-
-
 gem 'bson'
-
-##<Tree _id: 53232f1747656f2eb0030000, user_id: nil, content: "the sith lords were taking over"> 
 gem 'bson_ext'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -52,12 +54,7 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development, :test do
-  # bundle exec rake doc:rails generates the API under doc/api.
-  gem 'rspec-rails'
-  gem 'mongoid-rspec'
-  gem 'pry'
-end
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -1,8 +1,7 @@
 require_relative '../spec_helper'
 
-binding.pry
 
-describe "the create tree page", :type => :feature do
+describe "the create tree page" do
 
   it "allows the user to create a tree from scratch" do
 
@@ -25,13 +24,13 @@ describe "the create tree page", :type => :feature do
 end
 
 
-describe "the edit tree page", type => :feature do
+  describe "the edit tree page" do
 
-# "User can view all of the past history of a tree"
+  # "User can view all of the past history of a tree"
 
-# "User can add to a tree"
+  # "User can add to a tree"
 
-# "User cant add to a tree that has been closed or already edited"
+  # "User cant add to a tree that has been closed or already edited"
 
-end
+  end
 end
