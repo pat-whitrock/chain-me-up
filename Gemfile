@@ -15,7 +15,11 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
+gem 'capybara'
 
+gem 'rspec-rails'
+
+gem 'rack-test'
 
 # db driver for mongodb
 gem 'mongoid', git: 'https://github.com/mongoid/mongoid.git'
