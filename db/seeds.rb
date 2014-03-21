@@ -8,9 +8,6 @@
 
 require 'benchmark'
 
-
-add_children(12, @tree)
-
 tree_one = Tree.new(:content => "A long long time ago")
 
 def add_children(number, tree)
