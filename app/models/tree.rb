@@ -3,17 +3,19 @@ require 'benchmark'
 class Tree
   include Mongoid::Document
 
-  recursively_embeds_many
-  belongs_to :user 
+  embeds_many :branches, :class_name => "Tree", :cyclic => true
+  embedded_in :root, :class_name => "Tree", :cyclic => true
+  
+  belongs_to :creator, :class_name => "User", :inverse_of => :roots
+  belongs_to :contributor, :class_name => "User", :inverse_of => :branches
 
-  field :user_id, type: Integer
-  field :content, type: String
   field :title, type: String
+  field :content, type: String
 
   def traverse_parents(&block)
     yield self
-    if !self.parent_tree.nil?
-      self.parent_tree.traverse_parents(&block)
+    if !self.root.nil?
+      self.root.traverse_parents(&block)
     end  
   end
 
@@ -46,14 +48,14 @@ class Tree
     id = BSON::ObjectId.from_string(branch_id)
     goal = nil
     queue = [] 
-    child_trees.each { |child| queue << child }
+    branches.each { |child| queue << child }
     while queue.size > 0
       tree = queue.shift
       if tree._id == id 
         goal = tree
         break
       elsif tree.has_children?
-        tree.child_trees.each { |child| queue << child }
+        tree.branches.each { |child| queue << child }
       end
     end
     goal 
@@ -64,7 +66,7 @@ class Tree
   end
 
   def has_children?
-    !!self.child_trees
+    !!self.branches
   end
   
 end

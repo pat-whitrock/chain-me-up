@@ -5,8 +5,8 @@ class User
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :roots, :class_name => "Tree"
-  has_many :branches, :class_name => "Tree"
+  has_many :roots, :class_name => "Tree", :inverse_of => :creator
+  has_many :branches, :class_name => "Tree", :inverse_of => :contributor
 
   ## Database authenticatable
   field :email,              type: String, default: ""
