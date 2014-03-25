@@ -1,8 +1,9 @@
 class BranchesController < ApplicationController
+  before_action :load_root
+  before_action :verify_can_create
 
   def new
-    @tree = Tree.find(params[:id])
-    if params[:id] == params[:branch_id]
+    if @tree.id.to_s == params[:branch_id]
       @branch = @tree
     else  
       @branch = @tree.find_branch(params[:branch_id])
@@ -11,7 +12,6 @@ class BranchesController < ApplicationController
   end
 
   def create
-    @tree = Tree.find(params[:id])
     if params[:id] == params[:branch_id]
       @branch = @tree
     else  
