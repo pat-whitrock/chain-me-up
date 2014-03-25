@@ -3,7 +3,7 @@
 <h3><%= tree.title %></h3>
 <p><%= tree.content %></p>
   <ul> 
-  <% tree.branches.each do |child|  %>
+  <% tree.child_trees.each do |child|  %>
     <li><%= link_to child.content, new_branch_path(tree, child) %></li>
   <% end %>
   </ul>

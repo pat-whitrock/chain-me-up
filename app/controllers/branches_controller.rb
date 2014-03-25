@@ -17,8 +17,9 @@ class BranchesController < ApplicationController
     else  
       @branch = @tree.find_branch(params[:branch_id])
     end 
-    @new_branch = @branch.branches.build(:content => params[:tree][:content])
+    @new_branch = @branch.child_trees.build(:content => params[:tree][:content])
 
+    @new_branch.bind_user(current_user)
     if @new_branch.save
       redirect_to '/'
     else

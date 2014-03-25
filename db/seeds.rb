@@ -8,6 +8,8 @@
 
 require 'benchmark'
 
+Tree.destroy_all
+
 tree_one = Tree.new(:content => "A long long time ago")
 
 def add_children(number, tree)
@@ -21,5 +23,5 @@ def add_children(number, tree)
   end  
 end
 
-add_children(8, tree_one)
+add_children(3, tree_one)
 

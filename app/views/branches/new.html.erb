@@ -10,7 +10,7 @@
 <% end %>
 
   <ul> 
-    <% @branch.branches.each do |child|  %>
+    <% @branch.child_trees.each do |child|  %>
       <li><%= link_to child.content, new_branch_path(@tree, child) %></li>
     <% end %>
   </ul>
