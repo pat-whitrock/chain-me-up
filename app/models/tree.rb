@@ -91,7 +91,6 @@ class Tree
     goal 
   end
 
-
   def bind_user(user)
     self.user_id = user.id.to_s
     user.trees << self.get_root.id.to_s 
