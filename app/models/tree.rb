@@ -32,13 +32,13 @@ class Tree
   end
 
   def get_root
-    # root = nil
-    # current_node = self
-    return self if self.parent_tree == nil
-    while !self.parent_tree.nil?
-      # return current_node if current_node.parent_tree == nil
-      self.parent_tree.get_root
-    end
+    current_node = self
+    if !self.parent_tree.nil? 
+      while !current_node.parent_tree.nil?
+        current_node = current_node.parent_tree
+      end
+    end  
+    current_node
   end
 
   def construct_history
