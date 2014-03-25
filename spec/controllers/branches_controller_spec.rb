@@ -26,5 +26,4 @@ describe BranchesController do
     end
   end
 
-
 end

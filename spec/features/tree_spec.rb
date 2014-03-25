@@ -12,9 +12,6 @@ describe "the create tree page" do
 
   it "allows the user to create a tree from scratch" do
 
-    # user = FactoryGirl.create(:user)
-    # login_as(user, :scope => :user)
-
     visit '/trees/new'
 
     fill_in 'Title', :with => "Example Tree title"
