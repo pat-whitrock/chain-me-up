@@ -23,6 +23,6 @@ class ApplicationController < ActionController::Base
   end
 
   def created_by_user?
-    !!@tree.user_id == current_user.id.to_s
+    !!(@tree.user_id == current_user.id.to_s)
   end
 end
