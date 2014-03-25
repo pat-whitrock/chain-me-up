@@ -1,6 +1,6 @@
 <% @trees.each do |tree| %>
 
-<h3><%= tree.title %></h3>
+<h3><%= link_to tree.title, tree_path(tree) %></h3>
 <p><%= tree.content %></p>
   <ul> 
   <% tree.child_trees.each do |child|  %>

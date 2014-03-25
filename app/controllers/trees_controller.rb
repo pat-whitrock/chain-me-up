@@ -15,13 +15,15 @@ class TreesController < ApplicationController
   end
 
   def index
-    @trees = Tree.all
+    # @trees = Tree.all
+    @trees = Tree.get_trees_by_user(current_user)
   end
 
   def show
     #at this point, we only look through Tree.first
-    @tree = Tree.find_by_id(params[:id])
-    @history = @tree.construct_history
+    @tree = Tree.find(params[:id])
+    @branch = @tree.find_branch_by_user(current_user.id.to_s)
+    @history = @branch.construct_history
   end
 
   def update

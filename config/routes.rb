@@ -9,7 +9,7 @@ ChainMeUp::Application.routes.draw do
 
   get '/trees' => 'trees#index'
 
-  get '/trees/:id' => 'trees#show'
+  get '/trees/:id' => 'trees#show', :as => "tree"
 
   patch '/trees/:id' => 'trees#update'
 

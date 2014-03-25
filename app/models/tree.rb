@@ -19,6 +19,10 @@ class Tree
     end  
   end
 
+  def self.get_trees_by_user(user) 
+    where(:id.in => user.trees)
+  end
+
   def history 
     @history ||= construct_history 
   end
@@ -71,17 +75,13 @@ class Tree
     goal 
   end
 
-  def find_branch(branch_id, user_id = nil)
-    if user_id
-      branch_id = user_id
-    end
-    id = BSON::ObjectId.from_string(branch_id)
+  def find_branch_by_user(user_id)
     goal = nil
     queue = [] 
     child_trees.each { |child| queue << child }
     while queue.size > 0
       tree = queue.shift
-      if tree._id == id 
+      if tree.user_id == user_id 
         goal = tree
         break
       elsif tree.has_children?
@@ -90,6 +90,7 @@ class Tree
     end
     goal 
   end
+
 
   def bind_user(user)
     self.user_id = user.id.to_s
