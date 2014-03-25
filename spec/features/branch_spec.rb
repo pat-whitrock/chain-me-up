@@ -1,6 +1,14 @@
 require_relative '../spec_helper'
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 describe "the create branch page" do
+
+  before :each do 
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+  end    
 
   let(:tree) {Tree.create(:title => "Many galaxies away...", :content => "Star wars began as a story")}
 

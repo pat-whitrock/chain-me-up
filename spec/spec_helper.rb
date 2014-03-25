@@ -18,9 +18,10 @@ ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-
+  config.include Devise::TestHelpers, type: :controller
   config.include Mongoid::Matchers, type: :model
   config.include Capybara::DSL
+  config.include ControllerHelpers, :type => :controller
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :truncation

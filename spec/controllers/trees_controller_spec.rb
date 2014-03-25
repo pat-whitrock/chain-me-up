@@ -5,7 +5,10 @@ describe TreesController do
 
   let(:tree) {Tree.create(:title => "Many galaxies away...", :content => "Star wars began as a story")}
 
+  let(:current_user) {create(:user)}
+
   before(:each) do 
+    sign_in(current_user)
     Tree.destroy_all
   end
 
@@ -29,13 +32,14 @@ describe TreesController do
     before(:each)  do 
       child = tree.child_trees.build(:content => "And it continued as a legend")
       child_2 = tree.child_trees.build(:content => "And it continued as a not legend")
+      child_2.bind_user(current_user)
       child.save
       child_2.save
     end 
 
     it 'displays trees and their branches' do 
 
-      get :index 
+      get :index
 
       expect(response).to render_template('index')
 

@@ -1,8 +1,19 @@
 require_relative '../spec_helper'
 
+include Warden::Test::Helpers
+Warden.test_mode!
+
 describe "the create tree page" do
 
+  before :each do 
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+  end    
+
   it "allows the user to create a tree from scratch" do
+
+    # user = FactoryGirl.create(:user)
+    # login_as(user, :scope => :user)
 
     visit '/trees/new'
 

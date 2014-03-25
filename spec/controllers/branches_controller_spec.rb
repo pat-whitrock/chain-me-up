@@ -4,8 +4,10 @@ describe BranchesController do
 
   let(:tree) {Tree.create(:title => "Many galaxies away...", :content => "Star wars began as a story")}
   let(:child) {tree.child_trees.build(:content => "And it continued as a legend")}
+  let(:current_user) {create(:user)}
 
   before :each do
+    sign_in(current_user)
     child.save
   end
 
