@@ -1,4 +1,6 @@
 class TreesController < ApplicationController
+  before_action :load_root, :only => [:show]
+  before_action :verify_can_view, :only => [:show]
 
   def new
     @tree = Tree.new
@@ -15,22 +17,25 @@ class TreesController < ApplicationController
   end
 
   def index
-    # @trees = Tree.all
     @trees = Tree.get_trees_by_user(current_user)
   end
 
   def show
-    #at this point, we only look through Tree.first
-    @tree = Tree.find(params[:id])
-    @branch = @tree.find_branch_by_user(current_user.id.to_s)
-    @history = @branch.construct_history
-  end
-
-  def update
+    if created_by_user?
+      @history = @tree.construct_history
+      @branch = @tree
+    else 
+      @branch = @tree.find_branch_by_user(current_user.id.to_s)
+      @history = @branch.construct_history
+    end  
   end
 
   private
+
+
+    
   def get_tree_params
     params.require(:tree).permit(:title,:content)
   end
+
 end

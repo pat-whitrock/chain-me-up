@@ -1,7 +1,9 @@
-<%= @history %>
+<%= @history[:content] %>
 
-<%= form_tag do  %>
+<br />
 
-
-
-<% end %>
+<%= link_to "Share this link for contributors", url_for(controller: 'branches',
+        action: 'new',
+        id: @tree.id,
+        branch_id: @branch.id,
+        only_path: false) %>
