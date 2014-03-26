@@ -37,13 +37,13 @@ describe TreesController do
       child_2.save
     end 
 
-    it 'displays trees and their branches' do 
+    it 'displays the tree titles' do 
 
       get :index
 
       expect(response).to render_template('index')
 
-      expect(response.body).to include("And it continued as a not legend")
+      expect(response.body).to include("Many galaxies away...")
     end
   end
 end

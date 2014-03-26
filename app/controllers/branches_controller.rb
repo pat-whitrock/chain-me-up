@@ -1,7 +1,7 @@
 class BranchesController < ApplicationController
   before_action :load_root
   before_action :verify_can_create
-
+  
   def new
     if @tree.id.to_s == params[:branch_id]
       @branch = @tree

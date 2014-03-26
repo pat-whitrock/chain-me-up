@@ -28,16 +28,27 @@ describe "the create tree page" do
 
     expect(page).to have_content('Example Tree title')
 
+  end
 end
 
+describe "the display tree page" do
 
-  describe "the edit tree page" do
+  before :each do 
+    @t = Tree.create(:title => "the first tree ever", :content => "has content")
+    @b = @t.child_trees.build(:content => "super awesome branch")
+    @b2 = @t.child_trees.build(:content => "content I shouldn't see!")
+    @b.save
+    @b2.save
+    user = FactoryGirl.create(:user)
+    login_as(user, :scope => :user)
+  end    
 
-  # "User can view all of the past history of a tree"
+  it "displays a tree only from your level down" do
+    visit "/trees/#{@t.id}/branch/#{@t.id}/new"
+    expect(page).to have_content('has content')
 
-  # "User can add to a tree"
-
-  # "User cant add to a tree that has been closed or already edited"
+    page.should_not have_content("super awesome branch")
+    page.should_not have_content("content I shouldn't see!")
 
   end
 end

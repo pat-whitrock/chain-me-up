@@ -40,4 +40,43 @@ describe "the create branch page" do
     child.reload
     expect(child.child_trees.first.content).to eq("Or so somebody told me about star wars")
   end
+
+  it 'prohibits the user from creating a branch on a tree they created' do
+    visit '/trees/new'
+    fill_in 'Title', :with => "Example Tree title"
+    fill_in 'Content', :with => "A long long time ago..."
+    click_button 'Create Tree'
+    tree = Tree.last
+
+    visit "/trees/#{tree.id}/branch/#{tree.id}/new"
+    expect(page).to have_content("You've already contributed to this tree")
+  end
+
+  it 'provides the user with a link to share with others' do
+    visit '/trees/new'
+    fill_in 'Title', :with => "Example Tree title"
+    fill_in 'Content', :with => "A long long time ago..."
+    click_button 'Create Tree'
+    tree = Tree.last
+
+    visit "/trees/#{tree.id}"
+    expect(page).to have_content("Share this link for contributors")
+
+  end
+
+  it 'prohibits the user from contributing twice to the same tree' do
+    @t = Tree.create(:title => "the first tree ever", :content => "has content")
+    @b = @t.child_trees.build(:content => "super awesome branch")
+    @b2 = @t.child_trees.build(:content => "content I shouldn't see!")
+    @b.save
+    @b2.save
+
+    visit "/trees/#{@t.id}/branch/#{@b.id}/new"
+    fill_in 'Content', :with => "testing..."
+    click_button 'Create Branch'
+
+    visit "/trees/#{@t.id}/branch/#{@b2.id}/new"
+    expect(page).to have_content("You've already contributed to this tree")
+  end
+
 end

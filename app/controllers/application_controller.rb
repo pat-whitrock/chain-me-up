@@ -17,9 +17,11 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_can_create
-    if current_user.trees.include?(@tree.id.to_s)
-      redirect_to trees_path, :notice => "You've already contributed to this tree"
-    end  
+    unless !current_user
+      if current_user.trees.include?(@tree.id.to_s)
+        redirect_to trees_path, :notice => "You've already contributed to this tree"
+      end  
+    end
   end
 
   def created_by_user?
