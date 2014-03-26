@@ -2,6 +2,7 @@ require 'benchmark'
 
 class Tree
   include Mongoid::Document
+  include Mongoid::Timestamps
 
   recursively_embeds_many 
 
