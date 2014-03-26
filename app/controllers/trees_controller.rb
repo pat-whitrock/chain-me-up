@@ -1,5 +1,6 @@
 class TreesController < ApplicationController
   before_action :load_root, :only => [:show]
+  before_action :authenticate_user!
   before_action :verify_can_view, :only => [:show]
 
   def new

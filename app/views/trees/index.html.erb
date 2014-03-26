@@ -1,12 +1,12 @@
 <% @trees.each do |tree| %>
 
 <h3><%= link_to tree.title, tree_path(tree) %></h3>
-<p><%= tree.content %></p>
-  <ul> 
-  <% tree.child_trees.each do |child|  %>
-    <li><%= link_to child.content, new_branch_path(tree, child) %></li>
-  <% end %>
-  </ul>
+<p><%#= tree.content %></p>
+ <!--  <ul> 
+  <%# tree.child_trees.each do |child|  %>
+    <li><%#= link_to child.content, new_branch_path(tree, child) %></li>
+  <%# end %>
+  </ul> -->
 
 
     <%#= link_to "Add a branch", new_branch_path(tree, tree)  %>
