@@ -28,14 +28,16 @@ function drawTree(tree, data) {
     .append("svg")
 
   var nodes = tree.nodes(data);
+  console.log(nodes);
   var links = tree.links(nodes);
-  
+  console.log(links);
  
 
   var diagonal = d3.svg.diagonal()
     .projection(function (d) {
-      return [d.y, d.x];
+      return [d.x, d.y];
     });  
+
 
   svg.selectAll(".link")
     .data(links)
@@ -52,54 +54,23 @@ function drawTree(tree, data) {
     .append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-        return "translate(" + d.y + "," + d.x + ")";
+        return "translate(" + d.x + "," + d.y + ")";
       })
+
+  
+      
 
   node.append("circle")
     .attr("r", 5)
-    .attr("fill", "#ccc");  
+    .attr("fill", "#ccc");
+
+  node.append("text")
+    .text(function(d) {
+      return d.content;
+    });    
 
 
 }
-
-
-
-// function Tree(dataset) {
-//   this.h = 400;
-//   this.w = 600;
-//   this.counter = 0;
-//   this.dataset = dataset;
-//   this.currentNode = dataset[0];
-//   this.svg = d3.select(".container")
-//     .append("svg")
-//     .attr("width", this.w)
-//     .attr("height", this.h);
-// }; 
-
-// Tree.prototype.drawNode = function(data) {
-
-//   this.svg.selectAll("circle")
-//     .data(data)
-//     .enter()
-//     .append("circle")
-//     .attr("cx", function(d, i) {
-
-//       return this.counter;
-
-//     })
-//     .attr("cy", 100 + this.counter)
-//     .attr("r", 10);
-  
-
-// };
-
-// Tree.prototype.getChildren = function(node) {
-//   return node.child_trees;
-// };
-
-// function setWidth(d, i) {
-//   return this.w/2 + (100*i)
-// };
 
 
 
