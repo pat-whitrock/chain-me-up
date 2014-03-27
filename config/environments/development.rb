@@ -6,6 +6,7 @@ ChainMeUp::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
+
   # Do not eager load code on boot.
   config.eager_load = false
 
@@ -23,6 +24,17 @@ ChainMeUp::Application.configure do
     domain:               'example.com',
     user_name:            'mayer.georgep@gmail.com',
     password:             '1011Water',
+    authentication:       'plain',
+    enable_starttls_auto: true  
+  }
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                 587,
+    domain:               'example.com',
+    user_name:            'bhaskaraspb',
+    password:             '',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
