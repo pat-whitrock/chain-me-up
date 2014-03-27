@@ -17,6 +17,7 @@ class InvitationsController < ApplicationController
       to = to.strip
       UserMailer.invite_friends(@link, to, current_user).deliver
     end  
+    redirect_to '/'
   end
 
 end
