@@ -2,8 +2,20 @@
 
 <br />
 
-<%= link_to "Share this link for contributors", url_for(controller: 'branches',
+
+<% link =  url_for(controller: 'branches',
         action: 'new',
         id: @tree.id,
         branch_id: @branch.id,
         only_path: false) %>
+
+<%= link_to link =%>
+
+<%= form_tag create_invitations_path(@tree, @branch) do %>
+  
+  Please comma-separate your emails:<br />
+  <%= label_tag :invitations %>
+  <%= text_area_tag :invitations %>
+  <%= submit_tag %>
+
+<% end %>        
