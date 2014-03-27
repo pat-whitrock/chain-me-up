@@ -60,6 +60,8 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     connection_pool (1.2.0)
+    d3_rails (3.4.3)
+      railties (>= 3.1.0)
     database_cleaner (1.2.0)
     devise (3.2.4)
       bcrypt (~> 3.0)
@@ -205,6 +207,7 @@ DEPENDENCIES
   bson_ext
   capybara
   coffee-rails (~> 4.0.0)
+  d3_rails
   database_cleaner
   devise
   factory_girl_rails

@@ -29,6 +29,11 @@ class TreesController < ApplicationController
       @branch = @tree.find_branch_by_user(current_user.id.to_s)
       @history = @branch.construct_history
     end  
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @branch.get_all_children }
+    end
   end
 
   private

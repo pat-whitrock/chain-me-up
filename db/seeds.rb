@@ -8,9 +8,10 @@
 
 require 'benchmark'
 
-Tree.destroy_all
 
-tree_one = Tree.new(:content => "A long long time ago")
+user = User.first
+tree_one = Tree.new(:content => "A long long time ago", :title => "A visualization")
+tree_one.bind_user(user)
 
 def add_children(number, tree)
   tree_child_one = tree.child_trees.build(:content => "branch #{number}")
