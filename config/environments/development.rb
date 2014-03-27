@@ -27,16 +27,6 @@ ChainMeUp::Application.configure do
     enable_starttls_auto: true  
   }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               'example.com',
-    user_name:            '',
-    password:             '',
-    authentication:       'plain',
-    enable_starttls_auto: true  
-  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
