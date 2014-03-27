@@ -1,5 +1,6 @@
 class BranchesController < ApplicationController
   before_action :load_root
+  before_action :authenticate_user!  
   before_action :verify_can_create
   
   def new
