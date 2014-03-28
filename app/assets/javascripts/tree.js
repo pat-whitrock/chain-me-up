@@ -8,7 +8,7 @@ $(function () {
   
 
   var tree = d3.layout.tree()
-    .size([600,600])
+    .size([400,400])
     .children(function(d) {
       return d.child_trees
     }); 
