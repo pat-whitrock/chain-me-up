@@ -1,11 +1,11 @@
-<%= form_for(@tree) do |f| %>
+<%= form_for @tree do |f| %>
 
   <%= f.label :title %><br/>
-  <%= f.text_field :title %><br/>
+  <%= f.text_field :title, :class => "form-control input-lg", :placeholder => "Name your story" %><br/>
 
   <%= f.label :content %><br/>
-  <%= f.text_area :content %><br/>
+  <%= f.text_area :content, :class => "form-control", :placeholder => "Write the first few sentances" %><br/>
 
-  <%= f.submit %>
+  <%= f.submit "create tree", :class => "btn btn-success" %>
 
 <% end %>

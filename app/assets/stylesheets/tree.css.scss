@@ -1,6 +1,7 @@
 .story-panel {
   position: fixed;
   max-width: 500px;
+  overflow: scroll;
   width: 100%;
   top: 0;
   bottom: 0;
@@ -15,6 +16,29 @@
     right: 0px;
   }
 
+  .content {
+    background: white;
+    margin: 20px;
+    padding: 20px;
+    box-sizing:border-box;
+    margin-top: 80px;
+    height: 100%;
+  }
+
+}
+
+#new_tree {
+  max-width: 600px;
+  margin: auto;
+  
+  textarea {
+    min-height: 400px;
+    resize: none;
+  }
+}
+
+.container {
+  max-width: 960px;
 }
 
 

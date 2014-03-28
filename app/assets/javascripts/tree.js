@@ -4,11 +4,11 @@
 // });
 
 
-$(function () {
+$(document).ready(function () {
   
 
   var tree = d3.layout.tree()
-    .size([400,400])
+    .size([500,800])
     .children(function(d) {
       return d.child_trees
     }); 
@@ -24,7 +24,7 @@ $(function () {
 
 function drawTree(tree, data) {
 
-  var svg = d3.select("body")
+  var svg = d3.select(".container")
     .append("svg")
 
   var nodes = tree.nodes(data);
@@ -35,7 +35,7 @@ function drawTree(tree, data) {
 
   var diagonal = d3.svg.diagonal()
     .projection(function (d) {
-      return [d.x, d.y];
+      return [d.y, d.x];
     });  
 
 
@@ -54,7 +54,7 @@ function drawTree(tree, data) {
     .append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-        return "translate(" + d.x + "," + d.y + ")";
+        return "translate(" + d.y + "," + d.x + ")";
       })
 
   
@@ -64,10 +64,10 @@ function drawTree(tree, data) {
     .attr("r", 5)
     .attr("fill", "#ccc");
 
-  node.append("text")
-    .text(function(d) {
-      return d.content;
-    });    
+  // node.append("text")
+  //   .text(function(d) {
+  //     return d.content;
+  //   });    
 
 
 }

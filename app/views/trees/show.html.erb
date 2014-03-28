@@ -1,23 +1,45 @@
-<%= @history[:content] %>
-
-<br />
-
-
 <% link =  url_for(controller: 'branches',
         action: 'new',
         id: @tree.id,
         branch_id: @branch.id,
         only_path: false) %>
 
-<%= link_to link =%>
+<div class="modal fade" id="invite" tabindex="-1" role="form" aria-labelledby="invite-friends" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Invite friends</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_tag create_invitations_path(@tree, @branch) do %>
+        <%= label_tag :invitations, "Please comma-separate your friends' emails:" %>
+        <%= text_area :invitations, "", :class => "form-control" %><br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Send", :class => "btn btn-success" %>
+        <% end %> 
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= form_tag create_invitations_path(@tree, @branch) do %>
-  
-  Please comma-separate your emails:<br />
-  <%= label_tag :invitations %>
-  <%= text_area_tag :invitations %>
-  <%= submit_tag %>
+<h2> 
+<button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">
+   + invite friends
+</button>
+<%= @history[:title] if @history[:title] %>
+</h2>
+<div class="content">
+  <%= @history[:content] %>
+</div>
 
-<% end %> 
 
+<div class="vis-container">
+
+</div> 
+<div class="story-panel">
+  <div class="content"><p><%= @history[:content] %></p></div> 
+</div> 
    

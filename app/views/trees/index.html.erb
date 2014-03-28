@@ -1,6 +1,14 @@
 <% @trees.each do |tree| %>
 
-<h3><%= link_to tree.title, tree_path(tree) %></h3>
+
+<div class="panel panel-default">
+  <div class="panel-heading"><%= link_to tree.title, tree_path(tree) %></div>
+  <div class="panel-body">
+    
+  </div>
+  
+</div>
+
 <p><%#= tree.content %></p>
  <!--  <ul> 
   <%# tree.child_trees.each do |child|  %>
