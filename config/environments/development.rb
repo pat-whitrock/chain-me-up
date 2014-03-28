@@ -21,8 +21,8 @@ ChainMeUp::Application.configure do
     address:              'smtp.gmail.com',
     port:                 587,
     domain:               'example.com',
-    user_name:            '',
-    password:             '',
+    user_name:            'bhaskaraspb',
+    password:             'loPtgG91&',
     authentication:       'plain',
     enable_starttls_auto: true  
   }
