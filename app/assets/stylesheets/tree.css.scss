@@ -1,0 +1,21 @@
+.story-panel {
+  position: fixed;
+  max-width: 500px;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  right: -500px;
+  -webkit-transition: right 1s;
+     -moz-transition: right 1s;
+          transition: right 1s;
+
+  &.open {
+    right: 0px;
+  }
+
+}
+
+
+
