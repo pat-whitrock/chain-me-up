@@ -228,7 +228,7 @@ Tree.prototype.reset = function() {
 $(document).ready(function () {
   
   var link = window.location + ".json"
-
+  console.log(link);
   d3.json(link, function(data) {
     tree = new Tree(data);
     tree.draw(data); 
