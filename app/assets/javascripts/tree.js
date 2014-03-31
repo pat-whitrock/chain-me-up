@@ -1,8 +1,3 @@
-// $.getJSON( link, function( data ) {
-//   drawTree(data);
-// });
-
-
 $(document).ready(function () {
   
   var tree = d3.layout.tree()
@@ -15,7 +10,6 @@ $(document).ready(function () {
 
   d3.json(link, function(data) {
     drawTree(tree, data); 
-    // console.log(data);
   });
 
   var svg = d3.select("body")
@@ -23,35 +17,29 @@ $(document).ready(function () {
 
 });
 
+function key(d) {
+  return d._id.$oid;
+}
+
+function linkKey(d) {
+  return d.target._id.$oid;
+}
+
+
 function drawTree(tree, data) {
-  console.log("Draw tree was triggered with")
-  console.log(data)
 
-  var key = function(d){
-    return d.depth
-  }
-
-  var svg = d3.select("svg")
+  var svg = d3.select("svg");
 
   var nodes = tree.nodes(data);
-  // console.log(nodes);
   var links = tree.links(nodes);
-  // console.log(links);
- 
+  
   var diagonal = d3.svg.diagonal()
     .projection(function (d) {
       return [d.y, d.x];
-    });  
+  });  
 
   var link = svg.selectAll(".link")
-    .data(links);
-
-  link
-    .exit()
-    .transition()
-    .duration(1000)
-    .attr("d", diagonal)
-    .remove();
+    .data(links, linkKey);
 
   link
     .enter()
@@ -61,54 +49,16 @@ function drawTree(tree, data) {
     .attr("stroke", "gray")
     .attr("d", diagonal);
 
-    // d3.json(window.location + ".json", function(error, first_element)
-    //   {console.log("function worked");
-    //   // console.log(first_element);
-    //   // root = first_element;
-
-    //   function collapse(d) {
-
-    //     // if (d.child_trees) {
-    //     //   d._child_trees = d.child_trees;
-    //     //   d._child_trees.forEach(collapse);
-    //     //   d.child_trees = null;
-    //     // }
-    //     }
-
-    //   // root.child_trees.forEach(collapse);
-    //   // console.log(root);
-    //   });
-
-
-// d3.json(nodes, function(error, flare) {
-//   root = flare;
-//   root.x0 = height / 2;
-//   root.y0 = 0;
-
-//   function collapse(d) {
-//     if (d.children) {
-//       d._children = d.children;
-//       d._children.forEach(collapse);
-//       d.children = null;
-//     }
-//   }
-
-//   root.children.forEach(collapse);
-//   update(root);
-// });
-
- // var nodeUpdate = node.transition()
- //   .duration('1000') 
 
   var node = svg.selectAll(".node")
-    .data(nodes);
+    .data(nodes, key);
 
   node
     .exit()
     .transition()
     .duration(1000)
     .attr("transform", function(d) {
-        return "translate(" + d.x + "," + d.y + ")"})
+        return "translate(" + d.y + "," + d.x + ")"})
     .remove();
 
   node    
@@ -116,11 +66,11 @@ function drawTree(tree, data) {
     .append("g")
       .attr("class", "node")
       .attr("transform", function(d) {
-        return "translate(" + d.x + "," + d.y + ")";
+        return "translate(" + d.y + "," + d.x + ")";
   });
 
   node.on("click", function(d){
-    drawTree(tree,d)
+    updateTree(tree, d)
   })  
 
   node.on("mouseover", function(d){
@@ -131,14 +81,66 @@ function drawTree(tree, data) {
     .attr("r", 5)
     .attr("fill", "#ccc");
 
-  // node.append("text")
-  //   .text(function(d) {
-  //     return d.content;
-  //   });    
+}
 
-  // var circles = d3.selectAll("circle")
-  // circles.on("click", function(){alert("hello")})
+function updateTree(tree, data) {
 
+  var svg = d3.select("svg");
+  
+  var nodes = tree.nodes(data);
+  var links = tree.links(nodes);
+
+
+  var diagonal = d3.svg.diagonal()
+    .projection(function (d) {
+      return [d.y, d.x];
+  });  
+
+  var link = svg.selectAll(".link")
+    .data(links, linkKey);
+
+
+  link  
+    .transition()
+    .duration(1000)
+    .attr("transform", function(d) {
+        return "translate(" + d.y + "," + d.x + ")"})
+    .attr("d", diagonal);
+
+  link
+    .exit()
+    .attr("d", diagonal)
+    .remove();  
+
+
+  var node = svg.selectAll(".node")
+    .data(nodes, key);
+
+  node
+    .exit()
+    .attr("transform", function(d) {
+        return "translate(" + d.y + "," + d.x + ")"})
+    .remove();
+
+
+  node 
+    .transition()
+    .duration(1000)
+    .attr("transform", function(d) {
+        return "translate(" + d.y + "," + d.x + ")"})
+    .attr("class", "node");
+
+  node.on("click", function(d){
+    updateTree(tree, d)
+  })  
+
+  node.on("mouseover", function(d){
+    console.log(d)
+  })  
+
+  node.append("circle")
+    .attr("r", 5)
+    .attr("fill", "#ccc");
 }
 
 
