@@ -29,10 +29,11 @@ function linkKey(d) {
 function drawTree(tree, data) {
 
   var svg = d3.select("svg");
-
+  
   var nodes = tree.nodes(data);
   var links = tree.links(nodes);
-  
+
+
   var diagonal = d3.svg.diagonal()
     .projection(function (d) {
       return [d.y, d.x];
@@ -40,6 +41,28 @@ function drawTree(tree, data) {
 
   var link = svg.selectAll(".link")
     .data(links, linkKey);
+
+
+
+  link  
+    .transition()
+    .duration(1000)
+    .each("start", function() {      // <-- Executes at start of transition
+       d3.select(this)
+        .style('opacity', 0)
+    })
+    .attr("d", diagonal)
+    .each("end", function() {      // <-- Executes at start of transition
+       d3.select(this)
+        .style('opacity', 1)
+    });
+
+
+  link
+    .exit()
+    .attr("d", diagonal)
+    .remove();  
+
 
   link
     .enter()
@@ -53,14 +76,6 @@ function drawTree(tree, data) {
   var node = svg.selectAll(".node")
     .data(nodes, key);
 
-  node
-    .exit()
-    .transition()
-    .duration(1000)
-    .attr("transform", function(d) {
-        return "translate(" + d.y + "," + d.x + ")"})
-    .remove();
-
   node    
     .enter()
     .append("g")
@@ -68,53 +83,6 @@ function drawTree(tree, data) {
       .attr("transform", function(d) {
         return "translate(" + d.y + "," + d.x + ")";
   });
-
-  node.on("click", function(d){
-    updateTree(tree, d)
-  })  
-
-  node.on("mouseover", function(d){
-    console.log(d)
-  })  
-
-  node.append("circle")
-    .attr("r", 5)
-    .attr("fill", "#ccc");
-
-}
-
-function updateTree(tree, data) {
-
-  var svg = d3.select("svg");
-  
-  var nodes = tree.nodes(data);
-  var links = tree.links(nodes);
-
-
-  var diagonal = d3.svg.diagonal()
-    .projection(function (d) {
-      return [d.y, d.x];
-  });  
-
-  var link = svg.selectAll(".link")
-    .data(links, linkKey);
-
-
-  link  
-    .transition()
-    .duration(1000)
-    .attr("transform", function(d) {
-        return "translate(" + d.y + "," + d.x + ")"})
-    .attr("d", diagonal);
-
-  link
-    .exit()
-    .attr("d", diagonal)
-    .remove();  
-
-
-  var node = svg.selectAll(".node")
-    .data(nodes, key);
 
   node
     .exit()
@@ -131,7 +99,7 @@ function updateTree(tree, data) {
     .attr("class", "node");
 
   node.on("click", function(d){
-    updateTree(tree, d)
+    drawTree(tree, d)
   })  
 
   node.on("mouseover", function(d){
