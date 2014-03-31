@@ -55,7 +55,6 @@ function drawTree(tree, data) {
     .attr("d", diagonal)
     .remove();
 
-
   link
     .enter()
     .append("path")
@@ -63,7 +62,6 @@ function drawTree(tree, data) {
     .attr("fill", "none")
     .attr("stroke", "gray")
     .attr("d", diagonal);
-
 
     // d3.json(window.location + ".json", function(error, first_element)
     //   {console.log("function worked");
@@ -122,7 +120,6 @@ function drawTree(tree, data) {
       .attr("transform", function(d) {
         return "translate(" + d.x + "," + d.y + ")";
   });
-
 
   node.on("click", function(d){
     drawTree(tree,d)
