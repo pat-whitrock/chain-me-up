@@ -99,7 +99,7 @@ class Tree
   end
 
   def get_all_children
-    Hash(self.attributes)
+    self.attributes
   end
 
   def has_children?
