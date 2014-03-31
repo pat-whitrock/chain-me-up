@@ -3,12 +3,12 @@ function Tree(data) {
   this.data = data;
   this.masterData = data;
   this.tree = d3.layout.tree()
-    .size([500,800])
+    .size([500,650])
     .children(function(d) {
         return d.child_trees
     }); 
 
-  d3.select("body").append("svg").append("g"); 
+  d3.select("body").append("svg"); 
   this.svg = d3.select("svg");
 }
 
@@ -55,10 +55,34 @@ Tree.prototype.transitionLinks = function() {
        d3.select(this)
         .style('opacity', 1)
     })
+    .attr("d", function(d) {
+      if(self.isRoot()) {
+        console.log("root!");
+        var s = {x: d.source.x, y:  d.source.y }
+        var t = {x: d.target.x, y:  d.target.y }
+      } else {
+        console.log("not root!");
+        var s = {x: d.source.x, y:  d.source.y + 75}
+        var t = {x: d.target.x, y:  d.target.y + 75}
+      }
+      return self.diagonal({source: s, target: t})
+    })
 
   link
     .exit()
     .attr("d", this.diagonal)
+    .attr("d", function(d) {
+      if(self.isRoot()) {
+        console.log("root!");
+        var s = {x: d.source.x, y:  d.source.y }
+        var t = {x: d.target.x, y:  d.target.y }
+      } else {
+        console.log("not root!");
+        var s = {x: d.source.x, y:  d.source.y + 75}
+        var t = {x: d.target.x, y:  d.target.y + 75}
+      }
+      return self.diagonal({source: s, target: t})
+    })
     .remove();  
 
   link
@@ -67,7 +91,18 @@ Tree.prototype.transitionLinks = function() {
     .attr("class", "link")
     .attr("fill", "none")
     .attr("stroke", "gray")
-    .attr("d", this.diagonal);  
+    .attr("d", function(d) {
+      if(self.isRoot()) {
+        console.log("root!");
+        var s = {x: d.source.x, y:  d.source.y }
+        var t = {x: d.target.x, y:  d.target.y }
+      } else {
+        console.log("not root!");
+        var s = {x: d.source.x, y:  d.source.y + 75}
+        var t = {x: d.target.x, y:  d.target.y + 75}
+      }
+      return self.diagonal({source: s, target: t})
+    })
 }
 
 Tree.prototype.transitionNodes = function() {
@@ -94,9 +129,9 @@ Tree.prototype.transitionNodes = function() {
   node 
     .transition()
     .duration(1000)
-    // .attr("transform", function(d) {
-    //     return self.xTranslation(d);
-    //   })
+    .attr("transform", function(d) {
+        return self.xTranslation(d);
+      })
     .attr("class", "node");
  
   var tree = this;
@@ -107,6 +142,7 @@ Tree.prototype.transitionNodes = function() {
 
   node.on("mouseover", function(d){
     console.log(d);
+    $(".story-panel p").text(self.getHistory(d));
   })  
 
   node.append("circle")
@@ -122,9 +158,19 @@ Tree.prototype.xTranslation = function(d) {
    return "translate(" + d.y + "," + d.x + ")"; 
   } else {
     console.log("This is not root");
-   return "translate(" + (100 + d.y) + "," + d.x + ")"; 
+   return "translate(" + (75 + d.y) + "," + d.x + ")"; 
   }
-}
+};
+
+Tree.prototype.getHistory = function(d) {
+  var string = "";
+  string += d.content;
+  while(d.depth > 0) {
+    d = d.parent
+    string = d.content + string;
+  }
+  return string;
+}; 
 
 Tree.prototype.addButtons = function(d) {
 
@@ -152,7 +198,7 @@ Tree.prototype.addButtons = function(d) {
     self.reset();
     })
 
-}
+};
 
 Tree.prototype.removeButtons = function(d) {
   $(".controls").remove();
