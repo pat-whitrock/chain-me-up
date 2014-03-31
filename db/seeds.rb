@@ -9,7 +9,7 @@
 require 'benchmark'
 
 
-user = User.first
+user = User.last
 tree_one = Tree.new(:content => "A long long time ago", :title => "A visualization")
 tree_one.bind_user(user)
 

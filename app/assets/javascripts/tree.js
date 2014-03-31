@@ -8,7 +8,7 @@ function Tree(data) {
         return d.child_trees
     }); 
 
-  d3.select("body").append("svg"); 
+  d3.select("body").append("svg").append("g"); 
   this.svg = d3.select("svg");
 }
 
@@ -32,12 +32,16 @@ Tree.prototype.draw = function(data) {
 
   this.transitionLinks();
   this.transitionNodes();
+  this.isRoot() ? this.removeButtons() : this.addButtons();
+
 }
 
 Tree.prototype.transitionLinks = function() {
 
   var link = this.svg.selectAll(".link")
     .data(this.links, this.linkKey);
+
+  var self = this;  
 
   link  
     .transition()
@@ -50,7 +54,7 @@ Tree.prototype.transitionLinks = function() {
     .each("end", function() {  
        d3.select(this)
         .style('opacity', 1)
-    });
+    })
 
   link
     .exit()
@@ -90,9 +94,9 @@ Tree.prototype.transitionNodes = function() {
   node 
     .transition()
     .duration(1000)
-    .attr("transform", function(d) {
-        return self.xTranslation(d);
-      })
+    // .attr("transform", function(d) {
+    //     return self.xTranslation(d);
+    //   })
     .attr("class", "node");
  
   var tree = this;
@@ -118,8 +122,40 @@ Tree.prototype.xTranslation = function(d) {
    return "translate(" + d.y + "," + d.x + ")"; 
   } else {
     console.log("This is not root");
-   return "translate(" + (50 + d.y) + "," + d.x + ")"; 
+   return "translate(" + (100 + d.y) + "," + d.x + ")"; 
   }
+}
+
+Tree.prototype.addButtons = function(d) {
+
+  var self = this;  
+
+  var traverseUpButton = this.svg.append("circle")
+    .attr("cx", this.masterData.y + 50)
+    .attr("cy", this.masterData.x)
+    .attr("r", 5)
+    .attr("fill", "#ccc")
+    .attr("class", "controls");
+
+  var resetButton = this.svg.append("circle")
+    .attr("cx", this.masterData.y + 25)
+    .attr("cy", this.masterData.x)
+    .attr("r", 5)
+    .attr("fill", "#ccc")
+    .attr("class", "controls");
+
+  traverseUpButton.on("click", function(d){
+    self.traverseUp();
+    })
+
+  resetButton.on("click", function(d){
+    self.reset();
+    })
+
+}
+
+Tree.prototype.removeButtons = function(d) {
+  $(".controls").remove();
 }
 
 Tree.prototype.isRoot = function() {
@@ -131,13 +167,15 @@ Tree.prototype.isRoot = function() {
 }
 
 Tree.prototype.traverseUp = function() {
-  this.draw(this.data.parent);
+  console.log("This is this" + this);
+  // console.log("This is self" + self);
   this.data = this.data.parent;
+  this.draw(this.data);
 }
 
-
 Tree.prototype.reset = function() {
-  this.draw(this.masterData);
+  this.data = this.masterData;
+  this.draw(this.data);
 }
 
 
