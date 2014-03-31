@@ -2,10 +2,11 @@
 //   drawTree(data);
 // });
 
-$(function () {
 
+$(document).ready(function () {
+  
   var tree = d3.layout.tree()
-    .size([400,400])
+    .size([500,800])
     .children(function(d) {
       return d.child_trees
     }); 
@@ -26,9 +27,6 @@ function drawTree(tree, data) {
   console.log("Draw tree was triggered with")
   console.log(data)
 
-  // d3.selectAll("svg")
-  //   .html("")
-
   var key = function(d){
     return d.depth
   }
@@ -42,7 +40,7 @@ function drawTree(tree, data) {
  
   var diagonal = d3.svg.diagonal()
     .projection(function (d) {
-      return [d.x, d.y];
+      return [d.y, d.x];
     });  
 
   var link = svg.selectAll(".link")

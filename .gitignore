@@ -16,4 +16,5 @@
 /tmp
 
 .env
+
 /config/environments
