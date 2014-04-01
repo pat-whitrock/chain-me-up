@@ -20,7 +20,6 @@ class ApplicationController < ActionController::Base
     if current_user
       if current_user.trees.include?(@tree.id.to_s)
         redirect_to trees_path, :notice => "You've already contributed to this tree"
-        return true
       end  
     end
   end
