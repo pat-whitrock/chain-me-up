@@ -5,7 +5,8 @@ class UserMailer < ActionMailer::Base
     @link = link
     @to = to
     @from = from
-    mail(from: from.email, to: to, subject: 'Welcome to My Awesome Site')
+    # binding.pry
+    mail(from: from.email, to: to, subject: 'Welcome to My Awesome Site').deliver
   end
 
 end
