@@ -9,9 +9,8 @@ class InvitationsController < ApplicationController
     end 
     
     params[:invitations][0].split(",").each do |to|
-        invitation = Invitation.create(:email => to, :tree => @tree.id.to_s, :branch => @branch.id.to_s)
-        url = "http://localhost:3000/submit?token=#{invitation.token}"
-        UserMailer.invite_friends(url, to, current_user)
+        @invitation = Invitation.create(:email => to, :tree => @tree.id.to_s, :branch => @branch.id.to_s)
+        UserMailer.invite_friends(@invitation, to, current_user)
       end  
       redirect_to '/'
     end

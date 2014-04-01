@@ -4,7 +4,10 @@ Welcome!
 
 Click the submit link below to add to the story and to share with more friends!
 
-<%= @link %>
+<%= url_for( controller: 'invitations',
+  action: 'show',
+  only_path: false,
+  token: @invitation.token) %>
 
 Best,
 ChainMeUp 

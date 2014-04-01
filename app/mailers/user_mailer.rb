@@ -1,8 +1,8 @@
 class UserMailer < ActionMailer::Base
   default from: 'from@chainmeup.com'
 
-  def invite_friends(link, to, from)
-    @link = link
+  def invite_friends(invitation, to, from)
+    @invitation = invitation
     @to = to
     @from = from
     # binding.pry
