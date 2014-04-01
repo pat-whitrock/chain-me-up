@@ -29,11 +29,9 @@ class ApplicationController < ActionController::Base
   end
 
   def assign_user
-    binding.pry
     if current_user
       current_user
     else 
-      binding.pry
       @invitation = Invitation.find_by_token(session[:token_id])
       user = User.find_or_create_by(:email => @invitation.email)
       user.trees << @invitation.tree

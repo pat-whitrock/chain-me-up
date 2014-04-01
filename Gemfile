@@ -12,7 +12,7 @@ gem 'sass-rails', '~> 4.0.2'
 
 gem 'd3_rails'
 gem 'dotenv'
-
+gem 'figaro'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
