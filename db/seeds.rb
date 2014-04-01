@@ -8,7 +8,6 @@
 
 require 'benchmark'
 
-
 user = User.last
 tree_one = Tree.new(:content => "heyeyey", :title => "A visualization")
 tree_one.bind_user(user)
@@ -39,5 +38,5 @@ def add_children_again(number, tree)
   end  
 end
 
-add_children_again(3, tree_one)
+ add_children_again(3, tree_one)
 

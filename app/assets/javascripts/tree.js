@@ -36,6 +36,15 @@ Tree.prototype.draw = function(data) {
 
 }
 
+// Tree.prototype.limitData = function(){
+//   var parentNode = this.data
+//   newData = parentNode
+//   while (depth < 4) {
+//     newData.children = parentNode.children 
+//     parentNode.children[0].depth = depth
+//   }
+// }
+
 Tree.prototype.transitionLinks = function() {
 
   var link = this.svg.selectAll(".link")
@@ -164,16 +173,18 @@ Tree.prototype.addButtons = function(d) {
 
   var self = this;  
 
+  this.removeButtons();
+
   var traverseUpButton = this.svg.append("circle")
-    .attr("cx", this.masterData.y + 50)
-    .attr("cy", this.masterData.x)
+    .attr("cx", this.data.y + 50)
+    .attr("cy", this.data.x)
     .attr("r", 5)
     .attr("fill", "#ccc")
     .attr("class", "controls");
 
   var resetButton = this.svg.append("circle")
-    .attr("cx", this.masterData.y + 25)
-    .attr("cy", this.masterData.x)
+    .attr("cx", this.data.y + 25)
+    .attr("cy", this.data.x)
     .attr("r", 5)
     .attr("fill", "#ccc")
     .attr("class", "controls");
