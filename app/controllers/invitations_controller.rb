@@ -24,10 +24,15 @@ class InvitationsController < ApplicationController
         @branch = @tree
       else  
         @branch = @tree.find_branch(params[:branch_id])
+      end
+      assign_user 
+      session[:token] = @invitation.token
+      if current_user.trees.include?(@tree.id.to_s)
+        redirect_to trees_path, :notice => "You've already contributed to this tree"
+      else 
+        @new_branch = Tree.new
+        render :"branches/new" 
       end  
-      session[:token_id] = @invitation.token
-      @new_branch = Tree.new
-      render :"branches/new"
     else 
       redirect_to root_path, :notice => "This doesn't look like a valid token"
     end 
