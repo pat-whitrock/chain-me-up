@@ -4,7 +4,7 @@ ChainMeUp::Application.routes.draw do
   
   root 'trees#index'
 
-  get "/submit" => 'tokens#new'
+  get "/submit" => 'invitations#show'
 
   get '/trees/new' => 'trees#new', :as => "new_tree"
 

@@ -19,11 +19,11 @@ ChainMeUp::Application.configure do
   # config.action_mailer.delivery_method = :sendmail
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address:              'smtp.mandrillapp.com',
+    address:              'smtp.gmail.com',
     port:                 587,
     domain:               'localhost',
-    user_name:            'bhaskaraspb@gmail.com',
-    password:             'bFrtJJ2rJIRrFWSKty8RJg',
+    user_name:            '',
+    password:             '',
     authentication:       'plain',
     enable_starttls_auto: true  
   }

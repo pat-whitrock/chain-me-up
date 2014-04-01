@@ -16,7 +16,7 @@ class Invitation
   end
 
   def self.find_by_token(token)
-    where(:token => token)
+    where(:token => token).first
   end
 
 end

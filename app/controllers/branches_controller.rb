@@ -22,7 +22,7 @@ class BranchesController < ApplicationController
 
     @new_branch.bind_user(@user)
     if @new_branch.save
-      redirect_to @new_branch, :notice => "Do you want to create an account to save access to your tree?"
+      redirect_to @tree, :notice => "Do you want to create an account to save access to your tree?"
     else
       redirect_to '/'
     end
