@@ -165,7 +165,7 @@ Tree.prototype.xTranslation = function(d) {
 Tree.prototype.getHistory = function(d) {
   var string = "";
   string += d.content;
-  while(d.depth > 0) {
+  while(d.parent !== undefined) {
     d = d.parent
     string = d.content + string;
   }

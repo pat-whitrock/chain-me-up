@@ -10,19 +10,34 @@ require 'benchmark'
 
 
 user = User.last
-tree_one = Tree.new(:content => "A long long time ago", :title => "A visualization")
+tree_one = Tree.new(:content => "heyeyey", :title => "A visualization")
 tree_one.bind_user(user)
 
-def add_children(number, tree)
+# def add_children(number, tree)
+#   tree_child_one = tree.child_trees.build(:content => "branch #{number}")
+#   tree_child_two = tree.child_trees.build(:content => "branch #{number}")
+#   tree_child_one.save
+#   tree_child_two.save
+#   if number != 0
+#     add_children(number-1, tree_child_one)
+#     add_children(number-1, tree_child_two)
+#   end  
+# end
+
+def add_children_again(number, tree)
   tree_child_one = tree.child_trees.build(:content => "branch #{number}")
   tree_child_two = tree.child_trees.build(:content => "branch #{number}")
+  tree_child_three = tree.child_trees.build(:content => "branch #{number}")
+  arr = [tree_child_one, tree_child_two, tree_child_three]
   tree_child_one.save
   tree_child_two.save
+  tree_child_three.save
   if number != 0
-    add_children(number-1, tree_child_one)
-    add_children(number-1, tree_child_two)
+    add_children_again(number-1, arr.sample)
+    add_children_again(number-1, arr.sample)
+    add_children_again(number-1, arr.sample)
   end  
 end
 
-add_children(3, tree_one)
+add_children_again(3, tree_one)
 
