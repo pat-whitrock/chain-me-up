@@ -13,12 +13,12 @@ class InvitationsController < ApplicationController
         branch_id: @branch.id,
         only_path: false);
     
-    params[:invitations].split(",").each do |to|
-      to = to.strip
-      UserMailer.invite_friends(@link, to, current_user).deliver
-    end  
-    redirect_to '/'
-  end
+    params[:invitations][0].split(",").each do |to|
+        to = to.strip
+        UserMailer.invite_friends(@link, to, current_user)
+      end  
+      redirect_to '/'
+    end
 
   def show 
     @invitation = Invitations.find_by_token(params[:token])
