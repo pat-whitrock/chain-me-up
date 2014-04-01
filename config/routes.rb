@@ -4,6 +4,8 @@ ChainMeUp::Application.routes.draw do
   
   root 'trees#index'
 
+  get "/submit" => 'tokens#new'
+
   get '/trees/new' => 'trees#new', :as => "new_tree"
 
   post '/trees' => 'trees#create'
@@ -15,7 +17,8 @@ ChainMeUp::Application.routes.draw do
   patch '/trees/:id' => 'trees#update'
 
 
-  get '/trees/:id/branch/:branch_id/new' => 'branches#new', :as => "new_branch"
+
+  # get '/trees/:id/branch/:branch_id/new' => 'branches#new', :as => "new_branch"
 
   post '/trees/:id/branch/:branch_id' => 'branches#create', :as => "create_branch" 
 

@@ -20,4 +20,16 @@ class InvitationsController < ApplicationController
     redirect_to '/'
   end
 
+  def show 
+    @invitation = Invitations.find_by_token(params[:token])
+    unless @invitation.empty?
+      @tree = @invitation.tree
+      @branch = @invitation.branch
+      session[:token_id] = @invitation.id
+      render :"branches/new"
+    else 
+      redirect_to root_path, :notice => "This doesn't look like a valid token"
+    end 
+  end
+
 end

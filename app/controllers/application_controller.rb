@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   end
 
   def verify_can_create
-    unless !current_user
+    if current_user
       if current_user.trees.include?(@tree.id.to_s)
         redirect_to trees_path, :notice => "You've already contributed to this tree"
       end  
@@ -26,5 +26,18 @@ class ApplicationController < ActionController::Base
 
   def created_by_user?
     !!(@tree.user_id == current_user.id.to_s)
+  end
+
+  def assign_user
+    if current_user
+      current_user
+    else 
+      @invitation = Invitation.find_by_token(session[:token_id])
+      user = User.find_or_create_by(:email => @invitation.email)
+      user.trees << Tree.find(@invitation.tree)
+      user.save!(:validate => false)
+      sign_in(user)
+      user
+    end
   end
 end
