@@ -7,21 +7,17 @@ class InvitationsController < ApplicationController
     else  
       @branch = @tree.find_branch(params[:branch_id])
     end 
-    @link = url_for(controller: 'branches',
-        action: 'new',
-        id: @tree.id,
-        branch_id: @branch.id,
-        only_path: false);
     
     params[:invitations][0].split(",").each do |to|
-        to = to.strip
-        UserMailer.invite_friends(@link, to, current_user)
+        invitation = Invitation.create(:email => to, :tree => @tree.id.to_s, :branch => @branch.id.to_s)
+        url = "http://localhost.com/submit?id=#{invitation.token}"
+        UserMailer.invite_friends(url, to, current_user)
       end  
       redirect_to '/'
     end
 
   def show 
-    @invitation = Invitations.find_by_token(params[:token])
+    @invitation = Invitation.find_by_token(params[:token])
     unless @invitation.empty?
       @tree = @invitation.tree
       @branch = @invitation.branch

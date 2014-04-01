@@ -18,7 +18,7 @@ ChainMeUp::Application.routes.draw do
 
 
 
-  # get '/trees/:id/branch/:branch_id/new' => 'branches#new', :as => "new_branch"
+  get '/trees/:id/branch/:branch_id/new' => 'branches#new', :as => "new_branch"
 
   post '/trees/:id/branch/:branch_id' => 'branches#create', :as => "create_branch" 
 

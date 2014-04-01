@@ -12,7 +12,7 @@ class Invitation
   private
 
   def create_token
-    self.token = Digest::MD5.digest("#{tree}#{branch}#{email}")
+    self.token = Digest::MD5.hexdigest("#{tree}#{branch}#{email}")
   end
 
   def self.find_by_token(token)
