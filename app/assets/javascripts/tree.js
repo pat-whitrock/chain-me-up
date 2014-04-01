@@ -45,23 +45,12 @@ Tree.prototype.transitionLinks = function() {
 
   link  
     .transition()
-    .duration(1000)
-    .each("start", function() {  
-       d3.select(this)
-        .style('opacity', 0)
-    })
-    .attr("d", this.diagonal)
-    .each("end", function() {  
-       d3.select(this)
-        .style('opacity', 1)
-    })
+    .duration(1000)  
     .attr("d", function(d) {
       if(self.isRoot()) {
-        console.log("root!");
         var s = {x: d.source.x, y:  d.source.y }
         var t = {x: d.target.x, y:  d.target.y }
       } else {
-        console.log("not root!");
         var s = {x: d.source.x, y:  d.source.y + 75}
         var t = {x: d.target.x, y:  d.target.y + 75}
       }
@@ -70,14 +59,11 @@ Tree.prototype.transitionLinks = function() {
 
   link
     .exit()
-    .attr("d", this.diagonal)
     .attr("d", function(d) {
       if(self.isRoot()) {
-        console.log("root!");
         var s = {x: d.source.x, y:  d.source.y }
         var t = {x: d.target.x, y:  d.target.y }
       } else {
-        console.log("not root!");
         var s = {x: d.source.x, y:  d.source.y + 75}
         var t = {x: d.target.x, y:  d.target.y + 75}
       }
@@ -88,16 +74,19 @@ Tree.prototype.transitionLinks = function() {
   link
     .enter()
     .append("path")
+    .attr("opacity", "0")
+    .transition()
+    .duration(1000) 
+    .delay(1000)  
+    .attr("opacity", "1")
     .attr("class", "link")
     .attr("fill", "none")
     .attr("stroke", "gray")
     .attr("d", function(d) {
       if(self.isRoot()) {
-        console.log("root!");
         var s = {x: d.source.x, y:  d.source.y }
         var t = {x: d.target.x, y:  d.target.y }
       } else {
-        console.log("not root!");
         var s = {x: d.source.x, y:  d.source.y + 75}
         var t = {x: d.target.x, y:  d.target.y + 75}
       }
@@ -142,7 +131,8 @@ Tree.prototype.transitionNodes = function() {
 
   node.on("mouseover", function(d){
     console.log(d);
-    $(".story-panel p").text(self.getHistory(d));
+    $(".story-panel p").text(self.getHistory(d)).addClass("open");
+    $(".story-panel").addClass("open");
   })  
 
   node.append("circle")
@@ -154,10 +144,8 @@ Tree.prototype.transitionNodes = function() {
 Tree.prototype.xTranslation = function(d) {
   
   if(this.isRoot()) {
-   console.log("This is root");
    return "translate(" + d.y + "," + d.x + ")"; 
   } else {
-    console.log("This is not root");
    return "translate(" + (75 + d.y) + "," + d.x + ")"; 
   }
 };
