@@ -140,8 +140,7 @@ Tree.prototype.transitionNodes = function() {
 
   node.on("mouseover", function(d){
     console.log(d);
-    $(".story-panel p").text(self.getHistory(d)).addClass("open");
-    $(".story-panel").addClass("open");
+    $(".story-panel span.future").text(self.getHistory(d));
   })  
 
   node.append("circle")
@@ -163,8 +162,8 @@ Tree.prototype.getHistory = function(d) {
   var string = "";
   string += d.content;
   while(d.parent !== undefined) {
-    d = d.parent
     string = d.content + string;
+    d = d.parent
   }
   return string;
 }; 
