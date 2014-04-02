@@ -244,16 +244,22 @@ function getDepth(obj) {
     return 1 + depth
 }
 
-
 $(document).ready(function () {
   
   var link = window.location + ".json"
   console.log(link);
-  d3.json(link, function(data) {
-    if(data) {
+  d3.json(link, function(error, data) {
+    if (error) {
+      d3.json(window.location + "home.json", function(data) {
+        if(data) {
+          tree = new Tree(data);
+          tree.draw(data); 
+        }
+      })
+    }
+    else if(data) {
       tree = new Tree(data);
       tree.draw(data); 
     }  
   });
-
 });

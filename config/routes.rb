@@ -1,10 +1,11 @@
 ChainMeUp::Application.routes.draw do
-
  
   get "welcome/index"
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   root 'welcome#index'
+
+  get '/home' => 'welcome#home'
 
   get "/submit" => 'invitations#show'
 

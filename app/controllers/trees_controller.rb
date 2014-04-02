@@ -25,6 +25,8 @@ class TreesController < ApplicationController
     if created_by_user?
       @history = @tree.construct_history
       @branch = @tree
+    elsif params[:branch_id]
+      @branch = @tree.find_branch(params[:branch_id])
     else 
       @branch = @tree.find_branch_by_user(current_user.id.to_s)
       @history = @branch.construct_history
