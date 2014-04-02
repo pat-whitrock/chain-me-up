@@ -38,8 +38,6 @@ class TreesController < ApplicationController
 
   private
 
-
-    
   def get_tree_params
     params.require(:tree).permit(:title,:content)
   end
