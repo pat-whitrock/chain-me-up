@@ -27,6 +27,10 @@ def add_children_again(number, tree)
   tree_child_one = tree.child_trees.build(:content => "branch #{number}")
   tree_child_two = tree.child_trees.build(:content => "branch #{number}")
   tree_child_three = tree.child_trees.build(:content => "branch #{number}")
+  # binding.pry
+  tree.get_root.contributor_count += 3
+  tree.get_root.save
+  # binding.pry
   arr = [tree_child_one, tree_child_two, tree_child_three]
   tree_child_one.save
   tree_child_two.save
@@ -39,4 +43,4 @@ def add_children_again(number, tree)
 end
 
  add_children_again(3, tree_one)
-
+ tree_one.save

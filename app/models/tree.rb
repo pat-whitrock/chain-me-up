@@ -12,6 +12,7 @@ class Tree
   field :title, type: String
   field :content, type: String
   field :user_id, type: String
+  field :contributor_count, type: Integer, default: 0
 
   def traverse_parents(&block)
     yield self
@@ -95,8 +96,14 @@ class Tree
   def bind_user(user)
     self.user_id = user.id.to_s
     user.trees << self.get_root.id.to_s 
+    self.get_root.contributor_count += 1
+    self.get_root.save
     user.save  
   end
+
+  # def set_contributor_count
+  #   self.contributor_count = 0
+  # end
 
   def get_all_children
     self.attributes
