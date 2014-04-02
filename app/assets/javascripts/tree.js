@@ -7,7 +7,8 @@ function Tree(data) {
         return d.child_trees
     }); 
 
-  d3.select("body").append("svg"); 
+  
+  d3.select("body").append("svg").attr("width","700").attr("height","400");
   this.svg = d3.select("svg");
 }
 
@@ -88,7 +89,7 @@ Tree.prototype.transitionLinks = function() {
     .remove();  
 
   link
-    .enter()
+    .enter() 
     .append("path")
     .attr("opacity", "0")
     .transition()
@@ -122,7 +123,8 @@ Tree.prototype.transitionNodes = function() {
       .attr("class", "node")
       .attr("transform", function(d) {
         return self.xTranslation(d);
-      });
+      })
+
 
   node
     .exit()
@@ -146,13 +148,27 @@ Tree.prototype.transitionNodes = function() {
   });  
 
   node.on("mouseover", function(d){
-    console.log(d);
     $(".story-panel span.future").text(self.getHistory(d));
   })  
 
   node.append("circle")
     .attr("r", 5)
     .attr("fill", "#ccc");
+
+  d3.selectAll("circle")
+    .on("mouseover", function() { 
+       d3.select(this)
+        .transition()
+        .duration(300)
+        .attr("r", 8);
+         })
+    .on("mouseout", function() { 
+
+       d3.select(this)
+        .transition()
+        .duration(300)
+        .attr("r", 5);
+         });  
 
 }
 
@@ -182,6 +198,9 @@ Tree.prototype.addButtons = function(d) {
   this.removeButtons();
 
   var traverseUpButton = this.svg.append("circle")
+    .attr("data-toggle","tooltip")
+    .attr("title","one level up")
+    .attr("data-placement","top")
     .attr("cx", this.data.y + 50)
     .attr("cy", this.data.x)
     .attr("r", 5)
@@ -189,11 +208,16 @@ Tree.prototype.addButtons = function(d) {
     .attr("class", "controls");
 
   var resetButton = this.svg.append("circle")
+    .attr("data-toggle","tooltip")
+    .attr("data-placement","top")
+    .attr("title","reset to full tree")
     .attr("cx", this.data.y + 25)
     .attr("cy", this.data.x)
     .attr("r", 5)
     .attr("fill", "#ccc")
     .attr("class", "controls");
+
+ 
 
   traverseUpButton.on("click", function(d){
     self.traverseUp();
@@ -203,10 +227,13 @@ Tree.prototype.addButtons = function(d) {
     self.reset();
     })
 
+   $(".controls").tooltip({container:'body'});
+
 };
 
 Tree.prototype.removeButtons = function(d) {
   $(".controls").remove();
+  $(".tooltip").remove();
 }
 
 Tree.prototype.isRoot = function() {
@@ -250,16 +277,12 @@ $(document).ready(function () {
   console.log(link);
   d3.json(link, function(error, data) {
     if (error) {
-      d3.json(window.location + "home.json", function(data) {
-        if(data) {
-          tree = new Tree(data);
-          tree.draw(data); 
-        }
-      })
+      
     }
     else if(data) {
       tree = new Tree(data);
       tree.draw(data); 
+      $(".story-panel").addClass("open");
     }  
   });
 });

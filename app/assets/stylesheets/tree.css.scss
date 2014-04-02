@@ -1,10 +1,11 @@
 .story-panel {
   position: fixed;
-  max-width: 400px;
-  width: 33%;
+  font-family: Georgia, "Times New Roman", Times, serif !important;
+  max-width: 500px;
+  padding: 20px;
   overflow: scroll;
   width: 100%;
-  top: 0;
+  top: 53px;
   bottom: 0;
   border: 1px solid #ccc;
   background: #f7f7f7;
@@ -17,12 +18,20 @@
     right: 0px;
   }
 
+  h2 {
+    width: 100%;
+  
+  .btn {
+    float: right;
+    margin-top: 10px;
+  }
+  }
+
   .content {
     background: white;
-    margin: 20px;
     padding: 20px;
     box-sizing:border-box;
-    margin-top: 80px;
+    margin-top: 20px;
     height: 100%;
   
     .future {
@@ -44,12 +53,19 @@
 
 .container {
   max-width: 960px;
+  margin-top: 40px;
 }
 
 svg {
   padding: 20px;
   width: 66%;
   display:block;
+
+  circle {
+    fill: #012530;
+    cursor: pointer;
+  }
+
 }
 
 

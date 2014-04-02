@@ -7,13 +7,22 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
- 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <div class="push-nav"></div> 
 
+  <% if notice %>
+  <div class="alert alert-success">
+    <a href="#" class="alert-link"><p class="notice"><%= notice %></p></a>
+  </div>
+  <% end %>
+
+  <% if alert %>
+  <div class="alert alert-success">
+    <a href="#" class="alert-link"><p class="notice"><%= alert %></p></a>
+  </div>
+   <% end %>
 
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      
+     
   <% if user_signed_in? %>
     
     <ul class="nav navbar-nav">

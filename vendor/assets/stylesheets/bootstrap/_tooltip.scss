@@ -6,7 +6,7 @@
 // Base class
 .tooltip {
   position: absolute;
-  z-index: $zindex-tooltip;
+  z-index: 10100000;
   display: block;
   visibility: visible;
   font-size: $font-size-small;

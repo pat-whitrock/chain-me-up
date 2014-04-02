@@ -4,17 +4,32 @@
 
 
 .intro {
-  float: right;
   width: 70%;
   padding: 20px;
-  background: rgba(96, 58, 104, .1);
+  height: 600px;
 }
 
-.background-svg {
+
+// .background-svg {
+//   position: absolute;
+//   top: 0;
+//   bottom: 0; 
+//   width: 100%;
+//   z-index: -1;
+//   background: #f7f7f7;
+// }
+
+
+#demo .story-panel {
   position: absolute;
-  top: 0;
-  bottom: 0; 
-  width: 100%;
-  z-index: -1;
-  background: #f7f7f7;
+  top: 600px;
+  height: 600px;
+  width: 50%;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+
+
+#demo .story-panel .content {
+  height: 90%;
 }

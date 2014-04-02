@@ -1,38 +1,39 @@
 
 
 $("document").ready(function() {
-  var $svg = $("<svg>") 
-  $svg.addClass("background-svg")
 
-  $("body").append($svg);
+  $("#explore").click(function() {
+    $('html,body').animate({
+      scrollTop: $("#demo").offset().top
+     }, 1000);
+  });
 
-  var width = window.width
-  var height = window.height
+  $("#demo").waypoint({
+    handler: function(direction) {
+      if(direction === "up") {
+        $("#demo .story-panel").removeClass("open");
+      } else if(direction === "down") {
+        $("#demo .story-panel").addClass("open");
+      }
+    },  
+    offset: 400,
+  });
 
-  var bg = d3.layout.tree().size([height, width])
-
-  var data = {
-    key: 1,
-    children: []
-  }
-
-  var nodes = bg.nodes(data);
-  var links = bg.links(nodes);
-
-  console.log(nodes);
-
+  $("#demo").waypoint({
+    handler: function(direction) {
+      d3.json(window.location + "home.json", function(data) {
+        if(data) {
+          tree = new Tree(data);
+          tree.draw(data); 
+        }
+      })
+    },
+    offset: 400,
+    triggerOnce: true
+  });  
+      
+ 
 });
 
-function Node() {
-  Node.numInstances = (MyObj.numInstances || 0) + 1;
-  this.key = Node.numInstances
-  this.children = []
-}
-
-function addChild(data) {
-  node = new Node()
-  data.children.push(node) 
-};
-
-
+   
 
