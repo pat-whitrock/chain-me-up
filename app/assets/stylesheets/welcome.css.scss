@@ -9,3 +9,12 @@
   padding: 20px;
   background: rgba(96, 58, 104, .1);
 }
+
+.background-svg {
+  position: absolute;
+  top: 0;
+  bottom: 0; 
+  width: 100%;
+  z-index: -1;
+  background: #f7f7f7;
+}

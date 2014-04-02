@@ -15,4 +15,5 @@
 //= require_tree .
 //= require_panel 
 //= require bootstrap
+//= require_welcome
 //= require d3
