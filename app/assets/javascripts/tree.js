@@ -9,6 +9,11 @@ function Tree(data) {
 
   d3.select("body").append("svg"); 
   this.svg = d3.select("svg");
+  var self = this;
+  // setInterval(function() {
+  //   self.update();
+  // }, 5000)
+  
 }
 
 Tree.prototype.nodeKey = function(d) {
@@ -227,8 +232,18 @@ Tree.prototype.traverseUp = function() {
 Tree.prototype.reset = function() {
   this.data = this.masterData;
   this.draw(this.data);
-}
+};
 
+// Tree.prototype.update = function() {
+//   var self = this;
+//   var link = window.location + ".json" + "?branch_id=" + this.data._id.$oid
+//   console.log(this.data)
+//   d3.json(link, function(data) {
+//         console.log(data)
+//         self.data = data;
+//         self.draw(self.data);  
+//     });
+// };
 
 function getDepth(obj) {
     var depth = 0;
@@ -257,3 +272,8 @@ $(document).ready(function () {
   });
 
 });
+
+
+
+
+
