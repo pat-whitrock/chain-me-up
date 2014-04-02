@@ -3,7 +3,6 @@ function Tree(data) {
   this.data = data;
   this.masterData = data;
   this.tree = d3.layout.tree()
-    .size([500,650])
     .children(function(d) {
         return d.child_trees
     }); 
@@ -21,6 +20,9 @@ Tree.prototype.linkKey = function(d) {
 }
 
 Tree.prototype.draw = function(data) {
+  var depth = getDepth(this.data);
+  console.log(depth);
+  this.calcSize(depth);
 
   this.nodes = this.tree.nodes(data);
   this.links = this.tree.links(this.nodes);
@@ -30,20 +32,25 @@ Tree.prototype.draw = function(data) {
       return [d.y, d.x];
   });  
 
+   
   this.transitionLinks();
   this.transitionNodes();
   this.isRoot() ? this.removeButtons() : this.addButtons();
+  
 
-}
+};
 
-// Tree.prototype.limitData = function(){
-//   var parentNode = this.data
-//   newData = parentNode
-//   while (depth < 4) {
-//     newData.children = parentNode.children 
-//     parentNode.children[0].depth = depth
-//   }
-// }
+Tree.prototype.calcSize = function(depth) {
+  var sum = .5
+  var i = 2
+
+  while(i < (depth)) {
+    sum += Math.pow(.5, i);
+    i++;
+  }
+    console.log(sum)
+  this.tree.size([400, 700*sum]);
+};
 
 Tree.prototype.transitionLinks = function() {
 
@@ -220,6 +227,21 @@ Tree.prototype.traverseUp = function() {
 Tree.prototype.reset = function() {
   this.data = this.masterData;
   this.draw(this.data);
+}
+
+
+function getDepth(obj) {
+    var depth = 0;
+    if (obj.child_trees) {
+        obj.child_trees.forEach(function (d) {
+            
+            var tmpDepth = getDepth(d)
+            if (tmpDepth > depth) {
+                depth = tmpDepth
+            }
+        })
+    }
+    return 1 + depth
 }
 
 
