@@ -42,6 +42,9 @@ class ApplicationController < ActionController::Base
     !!(@tree.user_id == current_user.id.to_s)
   end
 
+  def logged_in?
+    redirect_to trees_path if current_user 
+  end
 
   def assign_user
     if current_user
