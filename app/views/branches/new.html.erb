@@ -1,15 +1,16 @@
-<h3><%= @branch.history[:title] if @branch %></h3>
-<p><%= @branch.history[:content] if @branch %></p>
+<div class="content">
+  <h3><%= @branch.history[:title] if @branch %></h3>
+  <p><%= @branch.history[:content] if @branch %></p>
 
-<%= form_for @new_branch, :url => create_branch_path(@tree, @branch) do |f| %>
+  <%= form_for @new_branch, :url => create_branch_path(@tree, @branch) do |f| %>
 
-  <%= f.label :content %><br />
-  <%= f.text_area :content %><br />
-  <%= f.submit "Create Branch"  %>
+    <%= f.label :content %><br />
+    <%= f.text_area :content, :class => "form-control", :placeholder => "add onto the story" %><br />
+    <%= f.submit "Create Branch", :class => "btn btn-success"   %>
 
-<% end %>
-
-
+  <% end %>
+</div>
+ 
 
 
 

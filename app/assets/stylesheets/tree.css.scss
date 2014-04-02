@@ -1,6 +1,7 @@
 .story-panel {
   position: fixed;
-  max-width: 500px;
+  max-width: 400px;
+  width: 33%;
   overflow: scroll;
   width: 100%;
   top: 0;
@@ -43,6 +44,12 @@
 
 .container {
   max-width: 960px;
+}
+
+svg {
+  padding: 20px;
+  width: 66%;
+  display:block;
 }
 
 
