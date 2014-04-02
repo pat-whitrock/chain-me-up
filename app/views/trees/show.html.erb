@@ -23,17 +23,5 @@
 <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">
    + invite friends
 </button>
-<%= @history[:title] if @history[:title] %>
-</h2>
-<div class="content">
-  <%= @history[:content] %>
-</div>
 
-
-<div class="vis-container">
-
-</div> 
-<div class="story-panel open">
-  <div class="content"><span class="history"><%= @history[:content] %> </span><span class="future"></span></div> 
-</div> 
-   
+<%= render "shared/show" %> 
