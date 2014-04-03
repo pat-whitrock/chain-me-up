@@ -91,6 +91,8 @@ svg {
   &.gray {
     background: #f7f7f7;
     border-bottom: 1px solid #ccc;
+    bottom: -35px;
+    top: auto;
 
     li {
       color: rgba(16,4,71,1) !important;
