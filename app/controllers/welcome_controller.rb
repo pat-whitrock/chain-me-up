@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
     @history = @branch.construct_history
 
     respond_to do |format|
-      format.html
+      format.html { render :layout => "welcome" }
       format.json {
        render json: @branch.get_all_children }
     end

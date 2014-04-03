@@ -9,7 +9,6 @@ p {
 }
 
 nav {
-  background: #012530 !important;
   .glyphicon {
     float: left;
     font-size: 2em;
@@ -21,6 +20,12 @@ nav {
   }
 
 
+#logo {
+  font-family: 'Lobster', cursive;
+  color: black;
+  font-size: 25px;
+}
+
 
   ul li {
     
@@ -29,9 +34,7 @@ nav {
 
     }
 
-    a {
-      color: white !important;
-    }
+
 
    }
 
