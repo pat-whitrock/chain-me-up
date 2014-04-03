@@ -146,14 +146,15 @@ Tree.prototype.transitionNodes = function() {
   node.on("click", function(d) {
     tree.data = d
     tree.draw(d);
-    $(".story-panel span.history").html(self.getHistory(d, undefined));    
-    future.html("");
+    var future = $(".story-panel span.future").html();
+    $(".story-panel span.history").append(future);    
+    $(".story-panel span.future").text(" ");
   });  
 
   node.on("mouseover", function(d){
     // $(".story-panel span.history").html();
 
-    $(".story-panel span.future").html(self.getHistory(d, this.data));
+    $(".story-panel span.future").html(self.getRecentHistory(d));
     console.log(self.data);
     console.log("node was moused over");
   })  
@@ -189,16 +190,49 @@ Tree.prototype.xTranslation = function(d) {
   }
 };
 
-Tree.prototype.getHistory = function(d, condition) {
+Tree.prototype.getHistory = function(d) {
   var string = "";
-  do {
+
+  while(d.parent !== undefined && d !== this.data) {
     string = d.content + string;
-    d = d.parent
+    d = d.parent;    
   }
-  while(d.parent !== condition);
 
   return string;
 }; 
+
+Tree.prototype.getOriginalHistory = function(d) {
+  var string = "";
+
+  while(d.parent !== undefined) {
+    string = d.content + string;
+    d = d.parent;    
+  }
+
+  return string;
+}; 
+
+Tree.prototype.getRecentHistory = function(d) {
+  var string = "";
+
+  while(d !== this.data) {
+    string = d.content + string;
+    d = d.parent;    
+  }
+
+  return string;
+};  
+
+// Tree.prototype.getRelativeHistory = function(d) {
+//   var string = "";
+//   do {
+//     string = d.content + string;
+//     d = d.parent
+//   }
+//   while(d.parent !== undefined && d !== this.data);
+
+//   return string;
+// }; 
 
 Tree.prototype.addButtons = function(d) {
 
@@ -226,14 +260,19 @@ Tree.prototype.addButtons = function(d) {
     .attr("fill", "#ccc")
     .attr("class", "controls");
 
- 
-
   traverseUpButton.on("click", function(d){
     self.traverseUp();
+    console.log(self);
+    $(".story-panel span.history").text(self.masterData.content);
+    $(".story-panel span.history").append(self.getOriginalHistory(self.data));    
+
+    $(".story-panel span.future").text("");
     })
 
   resetButton.on("click", function(d){
     self.reset();
+    $(".story-panel span.history").text(self.masterData.content);    
+    $(".story-panel span.future").text("");
     })
 
    $(".controls").tooltip({container:'body'});
