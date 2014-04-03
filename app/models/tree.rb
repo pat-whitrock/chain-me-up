@@ -3,11 +3,9 @@ require 'benchmark'
 class Tree
   include Mongoid::Document
   include Mongoid::Timestamps
+  before_save :wrap_content
 
   recursively_embeds_many 
-
-  # embeds_many :branches, :class_name => "Tree", :cyclic => true
-  # embedded_in :root, :class_name => "Tree", :cyclic => true
   
   field :title, type: String
   field :content, type: String
@@ -101,9 +99,9 @@ class Tree
     user.save  
   end
 
-  # def set_contributor_count
-  #   self.contributor_count = 0
-  # end
+  def wrap_content
+    self.content = self.content.gsub("\n", "<br/>")
+  end
 
   def get_all_children
     self.attributes
