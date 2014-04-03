@@ -33,7 +33,7 @@ $("document").ready(function() {
   });  
 
 
-
+if(window.location !== '')
 
 var width = window.width,
     height = window.height - 50;
@@ -53,8 +53,8 @@ var diagonal = d3.svg.diagonal();
   //     return [d.y, d.x];
   // }); 
 
-$("body").prepend("<svg>")
-var svg = d3.select("svg")
+// $("body").prepend("<svg>")
+var svg = d3.select("svg.home")
     .attr("class", "bg")
     .append("g")
   
