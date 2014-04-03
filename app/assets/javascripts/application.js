@@ -15,8 +15,9 @@
 //= require_panel 
 //= require_branches 
 //= require waypoints
-//= require_welcome
 //= require d3  
+//= require_welcome
+//= require_tree-d3
 //= require affix
 //= require alert
 //= require button
