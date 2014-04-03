@@ -8,7 +8,7 @@
 
 require 'benchmark'
 
-user = User.last
+user = User.find_by(:email => "mayer.georgep@gmail.com")
 tree_one = Tree.new(:content => "Tumblr you probably haven't heard of them Intelligentsia. ", :title => "A visualization")
 tree_one.bind_user(user)
 
