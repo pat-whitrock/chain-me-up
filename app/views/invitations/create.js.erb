@@ -1,0 +1,9 @@
+$("#invite").modal('hide');
+$note = $("<div>");
+$note.addClass("note");
+$note.text("invitations sent successfully!");
+
+$("body").append($note);
+var w = $note.width();
+$note.css("margin-left", "-" + w + "px");
+$note.delay(5000).fadeOut();

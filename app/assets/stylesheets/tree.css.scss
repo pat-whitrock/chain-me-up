@@ -20,12 +20,10 @@
 
   h2 {
     width: 100%;
-  
-  .btn {
-    float: right;
-    margin-top: 10px;
   }
-  }
+
+
+
 
   .content {
     background: white;
@@ -90,6 +88,7 @@ svg {
 
   &.gray {
     background: #f7f7f7;
+    position: static;
     border-bottom: 1px solid #ccc;
     bottom: -35px;
     top: auto;

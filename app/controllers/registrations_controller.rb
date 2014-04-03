@@ -4,6 +4,12 @@ class RegistrationsController < Devise::RegistrationsController
     @user = User.new
   end
 
+  def edit 
+    respond_to do |format|
+      format.js
+    end
+  end 
+
   def update
 
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)

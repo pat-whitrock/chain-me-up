@@ -50,10 +50,15 @@ class ApplicationController < ActionController::Base
     if current_user
       current_user
     else 
-      user = User.find_or_create_by(:email => @invitation.email)
-      user.guest = true 
-      user.save!(:validate => false)
-      sign_in(user)
+      user = User.find_by(:email => @invitation.email)
+      if user
+        sign_in(user)
+      else 
+        user = User.create(:email => @invitation.email)  
+        user.guest = true 
+        user.save!(:validate => false)
+        sign_in(user)
+      end
       user
     end
   end
