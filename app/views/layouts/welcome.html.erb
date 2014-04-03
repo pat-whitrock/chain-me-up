@@ -9,7 +9,6 @@
 <body>
   <svg class="home"></svg>
 
-
   <% if notice %>
   <div class="alert alert-success">
     <a href="#" class="alert-link"><p class="notice"><%= notice %></p></a>
@@ -25,14 +24,13 @@
   <nav class="navbar navbar-default navbar-fixed-top white" role="navigation">
   <a class="navbar-brand" id="logo" href="#">loooseleaf</a>
   <ul class="nav navbar-nav navbar-right">
-    <li><%= link_to "Sign up", new_user_registration_path, :remote => true, :class => 'navbar-link navbar-right'  %></li>
-    <li><%= link_to "Login", new_user_session_path, :remote => true, :class => 'navbar-link navbar-right'  %></li>
+    <li><%= link_to "Sign up", new_user_registration_path, :remote => true, :class => 'navbar-link navbar-right' %></li>
+    <li><%= link_to "Login", new_user_session_path, :remote => true, :class => 'navbar-link navbar-right' %></li>
   </ul>  
 
 </nav>
 
   <%= yield %>
-
 
 </body>
 </html>

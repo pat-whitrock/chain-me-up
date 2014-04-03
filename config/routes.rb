@@ -1,7 +1,10 @@
 ChainMeUp::Application.routes.draw do
  
   get "welcome/index"
-  devise_for :users, :controllers => { :registrations => "registrations" }
+
+  devise_for :users, :path => '', :controllers => {:sessions => 'sessions', :registrations => 'registrations'}, :path_names => { :sign_in => '/users/sign_in', :password => 'forgot', :confirmation => 'confirm', :unlock => 'unblock', :registration => '', :sign_up => '/users/sign_up', :sign_out => 'logout'}
+
+  # get "/users/sign_in" => 'sessions#login'
 
   root 'welcome#index'
 
@@ -18,8 +21,6 @@ ChainMeUp::Application.routes.draw do
   get '/trees/:id' => 'trees#show', :as => "tree"
 
   patch '/trees/:id' => 'trees#update'
-
-
 
   get '/trees/:id/branch/:branch_id/new' => 'branches#new', :as => "new_branch"
 
