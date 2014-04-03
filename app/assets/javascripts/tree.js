@@ -283,6 +283,7 @@ $(document).ready(function () {
       tree = new Tree(data);
       tree.draw(data); 
       $(".story-panel").addClass("open");
+      $(".instruction").addClass("closed");
     }  
   });
 });

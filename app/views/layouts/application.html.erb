@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="push-nav"></div> 
-
+  <%= render :partial => "shared/instructions" %>
   <% if notice %>
   <div class="alert alert-success">
     <a href="#" class="alert-link"><p class="notice"><%= notice %></p></a>
@@ -23,33 +23,16 @@
 
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <a class="navbar-brand" id="logo" href="#">looseleaf</a> 
-  <% if user_signed_in? %>
+  
+  <% if user_signed_in?  %>
     
-    <ul class="nav navbar-nav">
-      <li><span class="glyphicon glyphicon-tree-deciduous"></span><%= link_to "Create Tree", new_tree_path, :class => 'navbar-link first'  %></span></li>
-      <li><%= link_to "View Trees", trees_path, :class => 'navbar-link'  %></span></li>
-      
-      
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User settings <b class="caret"></b></a>
-        <ul class="dropdown-menu">
-          <li><%= link_to 'Edit account settings', edit_user_registration_path, :class => 'navbar-link' %></li>
-          <li><%= link_to 'Logout', destroy_user_session_path, method: :delete, :class => 'navbar-link' %></li>
-        </ul>
-      </li>
-    </ul>
+    <%= render :partial => "navigation/logged_in" if !current_user.guest %>
+    <%= render :partial => "navigation/guest" if current_user.guest %>
     <p class="navbar-text navbar-right"><%= current_user.username %></p>
 
-
-
     
-  <% else %>
-  <ul class="nav navbar-nav">
-    <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
-    <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-  </ul>  
+  <% elsif !user_signed_in?  %>
+    <%= render :partial => "navigation/logged_out" %>
   <% end %>
 </nav>
 

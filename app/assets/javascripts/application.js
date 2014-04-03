@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require_tree .
 //= require_panel 
+//= require_branches 
 //= require waypoints
 //= require bootstrap
 //= require_welcome

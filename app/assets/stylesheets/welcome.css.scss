@@ -1,7 +1,12 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-nav {}
+nav {
+
+  .btn {
+    margin: 10px 10px;
+  }
+}
 
 .intro {
   width: 50%;
@@ -12,6 +17,7 @@ nav {}
   top: 70px;
   margin: auto;
 }
+
 
 .btn.white {
   color: white !important;
@@ -61,7 +67,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#13004c', end
 
 #demo .story-panel {
   position: absolute;
-  top: 700px;
+  top: 850px;
   height: 600px;
   width: 50%;
   overflow: hidden;

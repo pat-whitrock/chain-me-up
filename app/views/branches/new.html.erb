@@ -1,6 +1,6 @@
 <div class="content">
-  <h3><%= @branch.history[:title] if @branch %></h3>
-  <p><%= @branch.history[:content] if @branch %></p>
+  <h2 data-toggle="tooltip" data-placement="left" title="the title of the story"><%= @branch.history[:title] if @branch %></h2>
+  <p data-toggle="tooltip" data-placement="left" title="what's been written so far"><%= @branch.history[:content] if @branch %></p>
 
   <%= form_for @new_branch, :url => create_branch_path(@tree, @branch) do |f| %>
 

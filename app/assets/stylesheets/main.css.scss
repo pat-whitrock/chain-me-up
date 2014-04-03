@@ -22,21 +22,12 @@ nav {
 
 #logo {
   font-family: 'Lobster', cursive;
-  color: black;
   font-size: 25px;
+  color: rgba(16,4,71,1);
 }
 
 
-  ul li {
-    
-    a.navbar-link.first {
-      padding-left: 60px;
-
-    }
-
-
-
-   }
+  ul
 
   .dropdown-menu li a {
     color: #012530 !important;
@@ -47,5 +38,24 @@ nav {
   margin: auto;
   width: 100%;
   max-width: 600px;
+  margin-bottom: 50px;
+
+
 }
+
+.btn.btn-success {
+    background: none !important;
+    border: 1px solid rgba(16,4,71,1) !important;
+    color: rgba(16,4,71,1) !important;
+
+    &:hover {
+      background: rgba(16,4,71,1) !important;
+      color: white !important;
+    } 
+
+    &:active {
+      background: rgba(16,4,71,.7) !important;
+      color: white !important;
+    } 
+  }
 

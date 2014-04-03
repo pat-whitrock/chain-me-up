@@ -1,7 +1,8 @@
 <div class="story-panel">
-  <h2><%= @history[:title] if @history[:title] %>  <% if current_user %><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#invite">
+  <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#invite">
    + invite friends
-</button><% end %>
+</button>
+  <h2><%= @history[:title] if @history[:title] %>  <% if current_user %><% end %>
 </h2>
   <div class="content"><span class="history"><%= @history[:content] %> </span><span class="future"></span></div> 
 </div>

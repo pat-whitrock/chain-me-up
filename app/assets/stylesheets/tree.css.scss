@@ -46,14 +46,14 @@
   margin: auto;
   
   textarea {
-    min-height: 400px;
+    min-height: 200px;
     resize: none;
+    font-family: georgia;
   }
 }
 
 .container {
   max-width: 960px;
-  margin-top: 40px;
 }
 
 svg {
@@ -66,6 +66,126 @@ svg {
     cursor: pointer;
   }
 
+}
+
+.instruction {
+  
+  background: rgba(16,4,71,1);
+  margin-top: -10px;
+  z-index: 33;
+  position: absolute;
+  width: 100%;
+  top: 53px;
+  border-bottom: 1px solid rgba(237,229, 219, 1);
+  margin-bottom: 10px;
+  transition: top 1s;
+
+  &.closed {
+    top: -60px;
+  
+  &:hover {
+    top: 53px;
+  }
+  }
+
+  &.gray {
+    background: #f7f7f7;
+    border-bottom: 1px solid #ccc;
+
+    li {
+      color: rgba(16,4,71,1) !important;
+
+      small, .step {
+        color: rgba(16,4,71,1) !important;
+      }
+
+      .step {
+        border: 1px solid rgba(16,4,71,1);
+      }
+    }
+  }
+  
+  .instructions-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+  }
+
+  ul {  
+    list-style:none;
+    width: 100%;
+    margin-left: -40px;
+  
+  li {
+    float: left;
+    width: 33.33333%;
+    text-align: center;
+    height: 100px;
+    cursor: pointer;
+    position: relative;
+    -webkit-transition: opacity .5s;
+    -moz-transition: opacity .5s;
+    transition: opacity .5s;
+    color: white;
+
+    .step {
+      position: absolute;
+      left: 40px;
+      top: 40%;
+      color: white;
+      text-shadow: none;
+      border: 1px solid white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 10px;
+    }
+
+    small {
+      text-shadow: none;
+      color: white;
+    }
+    
+    &.completed {
+      color: white;
+      text-shadow: 0 -1px 0 #888;
+      opacity: 1;
+
+    }
+
+    &.current {
+      color: white;
+      text-shadow: 0 -1px 0 #888;
+      opacity: 1;
+
+      small {
+        padding-bottom: 10px;
+        border-bottom: 3px solid white;
+      }
+    }
+
+    &.next {
+      text-shadow: 0 -1px 0 #888;
+      color: white;
+      opacity: 1;
+    }
+
+    &:hover {
+      opacity: .8;
+    }
+    i {
+      font-size: 3.5em;
+      padding-top: 20px;
+      display: block;
+    }
+  }
+  }
+
+  &:after {
+    content: ".";
+    clear: both;
+    margin-left: -9999px;
+  }
 }
 
 

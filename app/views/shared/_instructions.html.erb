@@ -1,17 +1,12 @@
-<section class="intro"> 
-    <p>Start a story and watch it grow</p>
-    <%= link_to "Create a story", new_user_registration_path, :class => "btn btn-primary btn-lg" %>
-    <button id="explore" class="btn btn-link white">Learn more</button>
-</section>
-<div class="instruction gray">
+<div class="instruction">
   <div class="instructions-wrapper">
     <ul>
-      <li  data-toggle="tooltip" data-placement="bottom" title="Each story is started by a single person and shared with a few friends. Create an account to start your own.">
+      <li class="completed" data-toggle="tooltip" data-placement="bottom" title="Each story is started by a single person and shared with a few friends. Create an account to start your own.">
         <i class="fa fa-envelope"></i>
         <div class="step">1</div>
         <small>get invited to a story</small>
       </li>
-      <li data-toggle="tooltip" data-placement="bottom" title="When you contribute, you see the entire story up until your invitation. Simply add to it.">
+      <li data-toggle="tooltip" data-placement="bottom"  title="When you contribute, you see the entire story up until your invitation. Simply add to it.">
         <i class="fa fa-pencil"></i>
         <div class="step">2</div>
         <small>contribute to it</small>
@@ -25,8 +20,3 @@
     <br clear="both">
   </div>
 </div> 
-
-<section id="demo">
-  <%= render "shared/show" %> 
-</section>
-

@@ -4,7 +4,7 @@ $("document").ready(function() {
 
   $("#explore").click(function() {
     $('html,body').animate({
-      scrollTop: $(".vis").offset().top - 100
+      scrollTop: $(".instruction").offset().top - 100
      }, 1000);
   });
 

@@ -1,0 +1,9 @@
+<ul class="nav navbar-nav">
+  <li><%= link_to "Create Tree", new_tree_path, :class => 'navbar-link first'  %></span></li>
+  <li><%= link_to "View Trees", trees_path, :class => 'navbar-link'  %></span></li>
+</ul>
+
+<ul class="nav navbar-nav navbar-right">
+
+  <li><%= button_to 'signup', edit_user_registration_path, :remote => true, :class => 'btn btn-default navbar-btn' %></li>
+</ul>
