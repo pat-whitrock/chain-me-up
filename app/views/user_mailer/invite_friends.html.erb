@@ -1,13 +1,18 @@
 Welcome!
 
-<%= @from.email %> has sent you an invite to contribute to his story.
+<p><%= @from.email %> has sent you an invite to contribute to his or her story.</p>
 
-Click the submit link below to add to the story and to share with more friends!
+<p>Here is the story so far: </p>
+<p><%= @history[:content] %></p>
 
-<%= url_for( controller: 'invitations',
+<p>Click the submit link below to add to the story and to share with more friends!</p>
+
+<p><%= url_for( controller: 'invitations',
   action: 'show',
   only_path: false,
-  token: @invitation.token) %>
+  token: @invitation.token) %></p>
 
+<br/>
 Best,
-ChainMeUp 
+<br/>
+Looseleaf

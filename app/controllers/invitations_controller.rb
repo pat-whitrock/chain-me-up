@@ -10,13 +10,13 @@ class InvitationsController < ApplicationController
     
     params[:invitations][0].split(",").each do |to|
       @invitation = Invitation.create(:email => to, :tree => @tree.id.to_s, :branch => @branch.id.to_s)
-      UserMailer.invite_friends(@invitation, to, current_user)
+      UserMailer.invite_friends(@invitation, to, current_user, @branch.history)
     end  
     
      respond_to do |format|
         format.js 
         format.html { redirect_to '/' } 
-    end
+      end
 
   end
 
