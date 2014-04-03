@@ -146,10 +146,16 @@ Tree.prototype.transitionNodes = function() {
   node.on("click", function(d) {
     tree.data = d
     tree.draw(d);
+    $(".story-panel span.history").html(self.getHistory(d, undefined));    
+    future.html("");
   });  
 
   node.on("mouseover", function(d){
-    $(".story-panel span.future").html(self.getHistory(d));
+    // $(".story-panel span.history").html();
+
+    $(".story-panel span.future").html(self.getHistory(d, this.data));
+    console.log(self.data);
+    console.log("node was moused over");
   })  
 
   node.append("circle")
@@ -158,6 +164,7 @@ Tree.prototype.transitionNodes = function() {
 
   d3.selectAll("circle")
     .on("mouseover", function() { 
+      console.log("circle was moused over");
        d3.select(this)
         .transition()
         .duration(300)
@@ -182,12 +189,14 @@ Tree.prototype.xTranslation = function(d) {
   }
 };
 
-Tree.prototype.getHistory = function(d) {
+Tree.prototype.getHistory = function(d, condition) {
   var string = "";
-  while(d.parent !== undefined) {
+  do {
     string = d.content + string;
     d = d.parent
   }
+  while(d.parent !== condition);
+
   return string;
 }; 
 

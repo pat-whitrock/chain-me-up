@@ -39,5 +39,5 @@ def add_children_again(number, tree, sample_text)
   end  
 end
 
-add_children_again(3, tree_one, text)
+add_children_again(2, tree_one, text)
 tree_one.save
