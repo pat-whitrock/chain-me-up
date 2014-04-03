@@ -6,7 +6,7 @@
         <h4 class="modal-title" id="myModalLabel">Invite friends</h4>
       </div>
       <div class="modal-body">
-        <%= form_tag create_invitations_path(@tree, @branch) do %>
+        <%= form_tag create_invitations_path(@tree, @branch), :remote => true do %>
         <%= label_tag :invitations, "Please comma-separate your friends' emails:" %>
         <%= text_area :invitations, "", :class => "form-control" %><br />
       </div>
