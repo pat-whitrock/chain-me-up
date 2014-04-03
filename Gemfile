@@ -64,6 +64,8 @@ gem 'devise'
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
 
+# gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

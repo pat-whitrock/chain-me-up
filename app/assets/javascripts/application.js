@@ -12,10 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require_panel 
 //= require_branches 
 //= require waypoints
-//= require bootstrap
 //= require_welcome
-//= require d3
+//= require d3  
+//= require affix
+//= require alert
+//= require button
+//= require carousel
+//= require collapse
+//= require dropdown
+//= require tab
+//= require transition
+//= require scrollspy
+//= require modal
+//= require tooltip
+//= require popover
+
+//= require_tree .
