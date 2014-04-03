@@ -8,7 +8,7 @@
 
 require 'benchmark'
 
-user = User.find_by(:email => "mayer.georgep@gmail.com")
+user = User.last
 tree_one = Tree.new(:content => "Tumblr you probably haven't heard of them Intelligentsia. ", :title => "A visualization")
 tree_one.bind_user(user)
 
@@ -23,9 +23,9 @@ McSweeney's art party Odd Future banh mi synth, American Apparel tote bag seitan
 text = text.gsub(". ", ".. ").split(". ")
 
 def add_children_again(number, tree, sample_text)
-  tree_child_one = tree.child_trees.build(:content => " "+sample_text.sample)
-  tree_child_two = tree.child_trees.build(:content => " "+sample_text.sample)
-  tree_child_three = tree.child_trees.build(:content => " "+sample_text.sample)
+  tree_child_one = tree.child_trees.build(:content => " "+sample_text.sample+" "+sample_text.sample)
+  tree_child_two = tree.child_trees.build(:content => " "+sample_text.sample+" "+sample_text.sample)
+  tree_child_three = tree.child_trees.build(:content => " "+sample_text.sample+" "+sample_text.sample)
   tree.get_root.contributor_count += 3
   tree.get_root.save
   arr = [tree_child_one, tree_child_two, tree_child_three]
