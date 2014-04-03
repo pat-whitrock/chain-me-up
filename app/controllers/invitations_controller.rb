@@ -29,7 +29,7 @@ class InvitationsController < ApplicationController
       else  
         @branch = @tree.find_branch(params[:branch_id])
       end
-      assign_user 
+      assign_user  
       session[:token] = @invitation.token
       if current_user.trees.include?(@tree.id.to_s)
         redirect_to trees_path, :notice => "You've already contributed to this tree"

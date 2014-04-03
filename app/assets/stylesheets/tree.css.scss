@@ -1,9 +1,40 @@
+.compass {
+  list-style: none;
+  position: absolute;
+  top: 20px;
+  width: 300px;
+  font-size: 12px;
+  padding: 10px;
+  color: white;
+  background: rgba(16,4,71,1);
+  left: -300px;
+  -webkit-transition: left 1s;
+     -moz-transition: left 1s;
+          transition: left 1s;
+  li {
+    margin-bottom: 5px;
+  }
+
+  &:hover {
+    left: 20px;
+  }
+
+  i {
+    float: right;
+    margin-top: -10px;
+    margin-right: -40px;
+    background: rgba(16,4,71,1);
+    padding: 10px 15px;
+  }
+}
+
+
 .story-panel {
   position: fixed;
   font-family: Georgia, "Times New Roman", Times, serif !important;
   max-width: 500px;
   padding: 20px;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 100%;
   top: 53px;
   bottom: 0;
@@ -39,6 +70,7 @@
 
 }
 
+
 #new_tree {
   max-width: 600px;
   margin: auto;
@@ -50,13 +82,8 @@
   }
 }
 
-.container {
-  max-width: 960px;
-}
-
 svg {
   padding: 20px;
-  width: 66%;
   display:block;
 
   circle {
@@ -73,16 +100,16 @@ svg {
   z-index: 33;
   position: absolute;
   width: 100%;
-  top: 53px;
+  top: 10px;
   border-bottom: 1px solid rgba(237,229, 219, 1);
   margin-bottom: 10px;
   transition: top 1s;
 
   &.closed {
-    top: -60px;
+    top: -105px;
   
   &:hover {
-    top: 53px;
+    top: 10px;
   }
   }
 

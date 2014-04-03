@@ -7,9 +7,10 @@ function Tree(data) {
         return d.child_trees
     }); 
 
-  
-  d3.select("body").append("svg").attr("width","700").attr("height","400").attr("class","vis");
+
+
   this.svg = d3.select("svg.vis");
+
 }
 
 Tree.prototype.nodeKey = function(d) {

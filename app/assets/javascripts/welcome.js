@@ -2,36 +2,39 @@
 
 $("document").ready(function() {
 
+
   $("#explore").click(function() {
     $('html,body').animate({
-      scrollTop: $(".instruction").offset().top - 100
+      scrollTop: 700
      }, 1000);
   });
 
   $("#demo").waypoint({
     handler: function(direction) {
+      console.log('aasdfads')
       if(direction === "up") {
-        $("#demo .story-panel").removeClass("open");
+        $(".story-panel").removeClass("open");
       } else if(direction === "down") {
-        $("#demo .story-panel").addClass("open");
+        $(".story-panel").addClass("open");
       }
-    }, 
-    offset: 300 
+    },
+    offset: 700
   });
 
-  $("#demo").waypoint({
-    handler: function(direction) {
-      d3.json(window.location + "home.json", function(data) {
+  // $("#demo").waypoint({
+  //   handler: function(direction) {
+     
+  //   },
+  //   triggerOnce: true,
+  //   offset: 400
+  // });  
+
+ d3.json(window.location + "home.json", function(data) {
         if(data) {
           tree = new Tree(data);
           tree.draw(data); 
         }
       })
-    },
-    triggerOnce: true, 
-    offset: 300
-  });  
-
 
 if(window.location !== '')
 

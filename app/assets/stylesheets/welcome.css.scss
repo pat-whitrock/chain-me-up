@@ -63,14 +63,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#13004c', end
 
 }
 
+#demo {
+  position: relative;
+}
 
+#demo svg {
+  float: left;
+}
 
 #demo .story-panel {
-  position: absolute;
-  top: 850px;
+  position: static;
+  float:right;
   height: 600px;
-  width: 50%;
-  overflow: hidden;
   padding-bottom: 20px;
 }
 
