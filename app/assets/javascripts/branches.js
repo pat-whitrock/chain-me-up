@@ -15,6 +15,7 @@ $(function() {
     if($content == "") {
       $("#tree_content").val($value);
     } else {
+      $array.shift();
       $array.forEach(function(n) {
         var patt = new RegExp(n)
         if($content.match(patt)) {     
