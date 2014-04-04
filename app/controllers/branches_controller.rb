@@ -6,7 +6,7 @@ class BranchesController < ApplicationController
     if @tree.id.to_s == params[:branch_id]
       @branch = @tree
     else  
-      @branch = @tree.find_branch(params[:branch_id])
+      @branch = @tree.find_branch_by(:id => params[:branch_id])
     end  
     @new_branch = Tree.new
   end
@@ -15,7 +15,7 @@ class BranchesController < ApplicationController
     if params[:id] == params[:branch_id]
       @branch = @tree
     else  
-      @branch = @tree.find_branch(params[:branch_id])
+      @branch = @tree.find_branch_by(:id => params[:branch_id])
     end 
     @new_branch = @branch.child_trees.build(:content => params[:tree][:content])
 

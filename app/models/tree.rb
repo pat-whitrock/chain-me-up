@@ -30,37 +30,22 @@ class Tree
     current_node
   end
 
-  def find_branch(branch_id)
-    id = BSON::ObjectId.from_string(branch_id)
+  def find_branch_by(hash)
+    case hash.keys.first
+      when :user_id then id = hash[:user_id]
+      when :id then id = BSON::ObjectId.from_string(hash[:id])
+      else raise "this method accepts either a branch id or a user id"
+    end
     goal = nil
-    queue = [] 
-    child_trees.each { |child| queue << child }
-    while queue.size > 0
+    queue = child_trees.inject([]) { |result, child| result << child; result }
+    until queue.empty?
       tree = queue.shift
-      if tree._id == id 
-        goal = tree
-        break
+      if tree.send(hash.keys.first) == id 
+        return goal = tree
       elsif tree.has_children?
         tree.child_trees.each { |child| queue << child }
       end
     end
-    goal 
-  end
-
-  def find_branch_by_user(user_id)
-    goal = nil
-    queue = [] 
-    child_trees.each { |child| queue << child }
-    while queue.size > 0
-      tree = queue.shift
-      if tree.user_id == user_id 
-        goal = tree
-        break
-      elsif tree.has_children?
-        tree.child_trees.each { |child| queue << child }
-      end
-    end
-    goal 
   end
 
   def bind_user(user)

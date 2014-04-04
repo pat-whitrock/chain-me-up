@@ -29,9 +29,9 @@ class TreesController < ApplicationController
       @history = @tree.history
       @branch = @tree
     elsif params[:branch_id]
-      @branch = @tree.find_branch(params[:branch_id])
+      @branch = @tree.find_branch_by(:id => params[:branch_id])
     else 
-      @branch = @tree.find_branch_by_user(current_user.id.to_s)
+      @branch = @tree.find_branch_by(:user_id => current_user.id.to_s)
       @history = @branch.history
     end  
 

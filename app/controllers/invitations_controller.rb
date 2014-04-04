@@ -5,7 +5,7 @@ class InvitationsController < ApplicationController
     if params[:id] == params[:branch_id]
       @branch = @tree
     else  
-      @branch = @tree.find_branch(params[:branch_id])
+      @branch = @tree.find_branch_by(:id => params[:branch_id])
     end 
     
     params[:invitations][0].split(",").each do |to|
@@ -27,7 +27,7 @@ class InvitationsController < ApplicationController
       if @tree.id.to_s == @invitation.tree
         @branch = @tree
       else  
-        @branch = @tree.find_branch(params[:branch_id])
+        @branch = @tree.find_branch_by(:id => params[:branch_id])
       end
       assign_user  
       session[:token] = @invitation.token
