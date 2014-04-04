@@ -146,7 +146,7 @@ Tree.prototype = {
       self.draw(d);
       var future = $(".story-panel span.future").html();
       $(".story-panel span.history").append(future);    
-      $(".story-panel span.future").text(" ");
+      $(".story-panel span.future").html(" ");
     });  
 
     node.on("mouseover", function(d){
@@ -222,9 +222,9 @@ Tree.prototype = {
       this, 
       function() {
       self.traverseUp();
-      $(".story-panel span.history").text(self.masterData.content);
+      $(".story-panel span.history").html(self.masterData.content);
       $(".story-panel span.history").append(self.getOriginalHistory(self.data));    
-      $(".story-panel span.future").text("");
+      $(".story-panel span.future").html("");
     });
 
     var resetButton = 
@@ -233,8 +233,8 @@ Tree.prototype = {
       this, 
       function() {
         self.reset();
-        $(".story-panel span.history").text(self.masterData.content);    
-        $(".story-panel span.future").text("");
+        $(".story-panel span.history").html(self.masterData.content);    
+        $(".story-panel span.future").html("");
       });
 
     $(".controls").tooltip({container:'body'});
