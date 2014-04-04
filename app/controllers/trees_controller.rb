@@ -26,13 +26,13 @@ class TreesController < ApplicationController
 
   def show
     if created_by_user?
-      @history = @tree.construct_history
+      @history = @tree.history
       @branch = @tree
     elsif params[:branch_id]
       @branch = @tree.find_branch(params[:branch_id])
     else 
       @branch = @tree.find_branch_by_user(current_user.id.to_s)
-      @history = @branch.construct_history
+      @history = @branch.history
     end  
 
     respond_to do |format|
@@ -44,7 +44,7 @@ class TreesController < ApplicationController
   private
 
   def get_tree_params
-    params.require(:tree).permit(:title,:content,:prompt)
+    params.require(:tree).permit(:title,:content)
   end
 
 end

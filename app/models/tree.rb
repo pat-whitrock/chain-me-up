@@ -11,7 +11,10 @@ class Tree
   field :content, type: String
   field :user_id, type: String
   field :contributor_count, type: Integer, default: 0
-  field :prompt
+  
+  field :prompt  
+
+
 
   def history 
     @history ||= construct_history 
@@ -93,7 +96,6 @@ class Tree
         title = branch.title
       end
     end
-    story = prompt + story if prompt
     {:title => title, :content => story.strip}
   end
 
