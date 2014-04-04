@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-
-
   protected
 
   def configure_permitted_parameters
@@ -50,7 +48,11 @@ class ApplicationController < ActionController::Base
     if current_user
       current_user
     else 
-      user = User.find_by(:email => @invitation.email)
+      begin
+        user = User.find_by(:email => @invitation.email)
+      rescue
+        user = nil
+      end
       if user
         sign_in(user)
       else 
