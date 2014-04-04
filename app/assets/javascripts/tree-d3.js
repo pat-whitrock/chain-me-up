@@ -277,7 +277,7 @@ function getDepth(obj) {
 function treeButton(placement, title, context, callback) {
   var button = context.svg.append("circle")
     .attr("data-toggle","tooltip")
-    .attr("title","one level up")
+    .attr("title", title)
     .attr("data-placement","top")
     .attr("cx", placement.y)
     .attr("cy", placement.x)
