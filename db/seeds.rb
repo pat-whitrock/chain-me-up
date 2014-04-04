@@ -14,7 +14,7 @@ original_data = %q(1. Call me Ishmael. -Herman Melville, Moby-Dick (1851)
 
 3. A screaming comes across the sky. -Thomas Pynchon, Gravity's Rainbow (1973)
 
-4. Many years later, as he faced the firing squad, Colonel Aureliano Buendía was to remember that distant afternoon when his father took him to discover ice. -Gabriel García Márquez, One Hundred Years of Solitude (1967; trans. Gregory Rabassa)
+4. Many years later, as he faced the firing squad, Colonel Aureliano Buendia was to remember that distant afternoon when his father took him to discover ice. -Gabriel García Márquez, One Hundred Years of Solitude (1967; trans. Gregory Rabassa)
 
 5. Lolita, light of my life, fire of my loins. -Vladimir Nabokov, Lolita (1955)
 
