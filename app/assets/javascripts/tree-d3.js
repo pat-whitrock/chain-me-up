@@ -116,6 +116,7 @@ Tree.prototype = {
       .data(this.nodes, this.nodeKey);
 
     var self = this;  
+
     node    
       .enter()
       .append("g")
@@ -140,22 +141,17 @@ Tree.prototype = {
         })
       .attr("class", "node");
    
-    var tree = this;
     node.on("click", function(d) {
-      tree.data = d
-      tree.draw(d);
+      self.data = d
+      self.draw(d);
       var future = $(".story-panel span.future").html();
       $(".story-panel span.history").append(future);    
       $(".story-panel span.future").text(" ");
     });  
 
     node.on("mouseover", function(d){
-      // $(".story-panel span.history").html();
-
       $(".story-panel span.future").html(self.getRecentHistory(d));
-      console.log(self.data);
-      console.log("node was moused over");
-    })  
+    });  
 
     node.append("circle")
       .attr("r", 5)
@@ -163,30 +159,25 @@ Tree.prototype = {
 
     d3.selectAll("circle")
       .on("mouseover", function() { 
-        console.log("circle was moused over");
-         d3.select(this)
+        d3.select(this)
           .transition()
           .duration(300)
           .attr("r", 8);
-           })
+      })
       .on("mouseout", function() { 
-
-         d3.select(this)
+        d3.select(this)
           .transition()
           .duration(300)
           .attr("r", 5);
-           });  
+      });  
 
   },
 
   xTranslation: function(d) {
-  
-    if(this.isRoot()) {
-     return "translate(" + d.y + "," + d.x + ")"; 
-    } else {
-     return "translate(" + (75 + d.y) + "," + d.x + ")"; 
-    }
+    var t = this.isRoot() ? "translate(" + d.y + "," + d.x + ")" : "translate(" + (75 + d.y) + "," + d.x + ")"; 
+    return t;
   },
+
 
   getHistory: function(d) {
     var string = "";
@@ -221,45 +212,36 @@ Tree.prototype = {
     return string;
   }, 
 
-  addButtons: function(d) {
+  addButtons: function() {
 
     var self = this;  
-
     this.removeButtons();
-
-    var traverseUpButton = new TreeButton({x: this.data.x, y: this.data.y  + 50}, "one level up", this)
-    var resetButton = new TreeButton({x: this.data.x, y: this.data.y  + 25}, "reset to full tree", this)
-
-    var handler = function(beforeAction, history) {
-       beforeAction();
-       $(".story-panel span.history").text(context.masterData.content);
-       $(".story-panel span.history").append(history); 
-       $(".story-panel span.future").text("");
-    };
-
-    // traverseUpButton.on("click", function(d){
-    //   return handler(self.traverseUp, self.getOriginalHistory(self.data))
-    // });
-
-    traverseUpButton.on("click", function(d){
+    var traverseUpButton = 
+    treeButton({x: this.data.x, y: this.data.y  + 50}, 
+      "one level up", 
+      this, 
+      function() {
       self.traverseUp();
       $(".story-panel span.history").text(self.masterData.content);
       $(".story-panel span.history").append(self.getOriginalHistory(self.data));    
-
       $(".story-panel span.future").text("");
-      })
+    });
 
-    resetButton.on("click", function(d){
-      self.reset();
-      $(".story-panel span.history").text(self.masterData.content);    
-      $(".story-panel span.future").text("");
-      })
+    var resetButton = 
+      treeButton({x: this.data.x, y: this.data.y  + 25}, 
+      "reset to full tree", 
+      this, 
+      function() {
+        self.reset();
+        $(".story-panel span.history").text(self.masterData.content);    
+        $(".story-panel span.future").text("");
+      });
 
-     $(".controls").tooltip({container:'body'});
+    $(".controls").tooltip({container:'body'});
 
   },
 
-  removeButtons: function(d) {
+  removeButtons: function() {
     $(".controls").remove();
     $(".tooltip").remove();
   },
@@ -282,18 +264,17 @@ Tree.prototype = {
 function getDepth(obj) {
     var depth = 0;
     if (obj.child_trees) {
-        obj.child_trees.forEach(function (d) {
-            
-            var tmpDepth = getDepth(d)
-            if (tmpDepth > depth) {
-                depth = tmpDepth
-            }
-        })
+      obj.child_trees.forEach(function (d) {
+        var tmpDepth = getDepth(d)
+          if (tmpDepth > depth) {
+              depth = tmpDepth
+          }
+      });
     }
-    return 1 + depth
+  return 1 + depth
 };
 
-function TreeButton(placement, title, context, callback) {
+function treeButton(placement, title, context, callback) {
   var button = context.svg.append("circle")
     .attr("data-toggle","tooltip")
     .attr("title","one level up")
@@ -304,7 +285,9 @@ function TreeButton(placement, title, context, callback) {
     .attr("fill", "#ccc")
     .attr("class", "controls");
 
-  if(callback) { callback(); }
+  if(callback) { button.on("click", function() {
+    callback();
+  }); }
   
   return button;  
 
