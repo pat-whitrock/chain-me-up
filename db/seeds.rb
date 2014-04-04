@@ -226,13 +226,12 @@ sentences.reject! do |quote|
 end
 
 sentences.reject! do |quote|
-  /in a voice that rustled/.match(quote) || /shadow of the waxwing slain/.match(quote) || /You get justice in the next world/.match(quote) || /Drusus Nero Germanicus/.match(quote) || /stubborn and determined middle/.match(quote)
+  /in a voice that rustled/.match(quote) || /shadow of the waxwing slain/.match(quote) || /You get justice in the next world/.match(quote) || /Drusus Nero Germanicus/.match(quote) || /stubborn and determined middle/.match(quote) || /died yesterday in his/.match(quote) || /of the New York Post/.match(quote)
 end
 
 sentences.each do |quote|
   Prompt.create(:content => quote)
 end
-
 
 user = User.last
 tree_one = Tree.new(:content => "Tumblr you probably haven't heard of them Intelligentsia. ", :title => "A visualization")

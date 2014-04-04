@@ -30,5 +30,6 @@
 //= require modal
 //= require tooltip
 //= require popover
+//= require chosen.jquery.js
 
 //= require_tree .

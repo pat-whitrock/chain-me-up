@@ -2,8 +2,10 @@
 
   <%= f.label :title %><br/>
   <%= f.text_field :title, :class => "form-control input-lg", :placeholder => "Name your story" %><br/>
-  <%= f.label :prompt %><br/>
-  <%= f.select(:prompt, @prompt) if @prompt %><br/><br/>
+  <%= f.label :prompt, "Choose a prompt to start your story" %><br/>
+
+  <%= f.select :prompt, @prompt, {}, {:class => "chosen-select"} %><br/><br/>
+
   <%= f.label :content %><br/>
   <%= f.text_area :content, :class => "form-control", :placeholder => "Write the first few sentences" %><br/>
 
