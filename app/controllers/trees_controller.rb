@@ -5,7 +5,9 @@ class TreesController < ApplicationController
 
   def new
     @tree = Tree.new
-    @prompt = Prompt.random_sample(5)  
+    @prompt = Prompt.random_sample(5).collect do |prompt|
+      prompt.content
+    end
   end
 
   def create

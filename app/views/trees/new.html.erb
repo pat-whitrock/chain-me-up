@@ -3,9 +3,9 @@
   <%= f.label :title %><br/>
   <%= f.text_field :title, :class => "form-control input-lg", :placeholder => "Name your story" %><br/>
   <%= f.label :prompt %><br/>
-  <%= f.select(:prompt, @prompt, { include_blank: true }) if @prompt %><br/><br/>
+  <%= f.select(:prompt, @prompt) if @prompt %><br/><br/>
   <%= f.label :content %><br/>
-  <%= f.text_area :content, :class => "form-control", :placeholder => "Write the first few sentances" %><br/>
+  <%= f.text_area :content, :class => "form-control", :placeholder => "Write the first few sentences" %><br/>
 
   <%= f.submit "create tree", :class => "btn btn-success" %>
 
