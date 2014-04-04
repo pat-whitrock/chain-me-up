@@ -5,11 +5,12 @@ class TreesController < ApplicationController
 
   def new
     @tree = Tree.new
+    @prompt = Prompt.random_sample(5)  
   end
 
   def create
     @tree = Tree.new(get_tree_params)
-    @tree.bind_user(current_user)    
+    @tree.bind_user(current_user)
     if @tree.save
       redirect_to '/', notice: "Your tree has been saved!"
     else
@@ -41,7 +42,7 @@ class TreesController < ApplicationController
   private
 
   def get_tree_params
-    params.require(:tree).permit(:title,:content)
+    params.require(:tree).permit(:title,:content,:prompt)
   end
 
 end

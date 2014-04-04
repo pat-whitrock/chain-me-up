@@ -11,28 +11,10 @@ class Tree
   field :content, type: String
   field :user_id, type: String
   field :contributor_count, type: Integer, default: 0
-
-  def traverse_parents(&block)
-    yield self
-    if !self.parent_tree.nil?
-      self.parent_tree.traverse_parents(&block)
-    end  
-  end
-
-  def self.get_trees_by_user(user) 
-    where(:id.in => user.trees)
-  end
+  field :prompt
 
   def history 
     @history ||= construct_history 
-  end
-
-  def get_history
-    history = []
-    self.traverse_parents do |node|
-      history << node
-    end
-    history
   end
 
   def get_root
@@ -43,19 +25,6 @@ class Tree
       end
     end  
     current_node
-  end
-
-  def construct_history
-    history_array = get_history.reverse
-    story = ""
-    title = nil
-    history_array.each_with_index do |branch, index|
-      story << branch.content + " "
-      if index == 0
-        title = branch.title
-      end
-    end
-    {:title => title, :content => story.strip}
   end
 
   def find_branch(branch_id)
@@ -99,16 +68,52 @@ class Tree
     user.save  
   end
 
-  def wrap_content
-    self.content = self.content.gsub("\n", "<br/>")
-  end
-
   def get_all_children
     self.attributes
   end
 
   def has_children?
     !!self.child_trees
+  end
+
+
+  def self.get_trees_by_user(user) 
+    where(:id.in => user.trees)
+  end
+
+  private
+
+  def construct_history
+    history_array = get_parents.reverse
+    story = ""
+    title = nil
+    history_array.each_with_index do |branch, index|
+      story << branch.content + " "
+      if index == 0
+        title = branch.title
+      end
+    end
+    story = prompt + story if prompt
+    {:title => title, :content => story.strip}
+  end
+
+  def get_parents
+    history = []
+    traverse_parents do |node|
+      history << node
+    end
+    history
+  end
+
+  def traverse_parents(&block)
+    yield self
+    if !self.parent_tree.nil?
+      self.parent_tree.traverse_parents(&block)
+    end  
+  end
+
+  def wrap_content
+    self.content = self.content.gsub("\n", "<br/>")
   end
   
 end
