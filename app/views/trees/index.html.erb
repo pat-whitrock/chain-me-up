@@ -9,14 +9,9 @@
   
 </div>
 
-<p><%#= tree.content %></p>
- <!--  <ul> 
-  <%# tree.child_trees.each do |child|  %>
-    <li><%#= link_to child.content, new_branch_path(tree, child) %></li>
-  <%# end %>
-  </ul> -->
 
+<% end %>
 
-    <%#= link_to "Add a branch", new_branch_path(tree, tree)  %>
-
+<% if @trees.empty? %>
+<p>It looks like you haven't started or contributed to any trees. Why don't you <%= link_to "create one?", new_tree_path %></p>
 <% end %>

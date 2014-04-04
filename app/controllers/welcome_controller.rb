@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   def index
     @tree = Tree.order(contributor_count: :desc).limit(1)[0]
     @branch = @tree
-    @history = @branch.history
+    @history = @branch.history if @branch
 
     respond_to do |format|
       format.html { render :layout => "welcome" }

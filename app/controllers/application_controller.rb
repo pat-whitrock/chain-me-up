@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    redirect_to trees_path if current_user 
+    redirect_to trees_path if current_user && !current_user.guest 
   end
 
   def assign_user
