@@ -69,13 +69,13 @@ ChainMeUp::Application.configure do
 
   config.action_mailer.raise_delivery_errors = false
 
-  config.action_mailer.default_url_options = { host: 'http://107.170.56.179' }
+  config.action_mailer.default_url_options = { host: 'http://looseleaf.me' }
   # config.action_mailer.delivery_method = :sendmail
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.mandrillapp.com',
     port:                 587,
-    domain:               'http://107.170.56.179/',
+    domain:               'http://looseleaf.me/',
     user_name:            ENV["MANDRILL_USERNAME"],
     password:             ENV["MANDRILL_API_KEY"],
     authentication:       'plain',
