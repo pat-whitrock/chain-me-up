@@ -14,8 +14,6 @@ class Tree
   
   field :prompt  
 
-
-
   def history 
     @history ||= construct_history 
   end

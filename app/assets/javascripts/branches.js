@@ -4,6 +4,8 @@ $(function() {
   $('.content h2').tooltip();
   $('.content p').tooltip();
 
+  $(".chosen-select").chosen({disable_search_threshold: 10});
+
   $("#tree_prompt").on("change", function(e) {
    
   var $value = $(this).val(); 
