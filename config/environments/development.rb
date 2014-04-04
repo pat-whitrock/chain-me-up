@@ -33,7 +33,7 @@ ChainMeUp::Application.configure do
 
   #below, was trying to get images to load from vendor/assets/images
   #config.assets.initialize_on_precompile = true
-  #config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+  # config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   #config.assets.paths << Rails.root.join('vendor', 'assets', 'images')
 
   # Raise an error on page load if there are pending migrations
