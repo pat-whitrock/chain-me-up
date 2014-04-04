@@ -14,7 +14,6 @@ Lolita, light of my life, fire of my loins.
 Happy families are all alike; every unhappy family is unhappy in its own way.
 It was a bright cold day in April, and the clocks were striking thirteen.
 I am an invisible man.
-The Miss Lonelyhearts of the New York Post
 The sun shone, having no alternative, on the nothing new.
 This is the saddest story I have ever heard.
 Through the fence, between the curling flower spaces, I could see them hitting.
@@ -45,7 +44,6 @@ You better not never tell nobody but God.
 If I am out of my mind, it's all right with me, thought Moses Herzog.
 When Dick Gibson was a little boy he was not Dick Gibson.
 The past is a foreign country; they do things differently there.
-Vaughan died yesterday in his last car
 I write this sitting in the kitchen sink.
 He was born with a gift of laughter and a sense that the world was mad.
 Psychics can see the color of time it's blue.
