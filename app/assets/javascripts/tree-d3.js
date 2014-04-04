@@ -7,303 +7,277 @@ function Tree(data) {
         return d.child_trees
     }); 
 
-
-
   this.svg = d3.select("svg.vis");
 
 }
 
-Tree.prototype.nodeKey = function(d) {
-  return d._id.$oid;
-}
+Tree.prototype = {
 
-Tree.prototype.linkKey = function(d) {
-  return d.target._id.$oid;
-}
+  nodeKey: function(d) {
+    return d._id.$oid;
+  },
 
-Tree.prototype.draw = function(data) {
-  var depth = getDepth(this.data);
-  console.log(depth);
-  this.calcSize(depth);
+  linkKey: function(d) {
+    return d.target._id.$oid;
+  },
 
-  this.nodes = this.tree.nodes(data);
-  this.links = this.tree.links(this.nodes);
+  draw: function(data) {
+    var depth = getDepth(this.data);
+    console.log(depth);
+    this.calcSize(depth);
 
-  this.diagonal = d3.svg.diagonal()
-    .projection(function (d) {
-      return [d.y, d.x];
-  });  
+    this.nodes = this.tree.nodes(data);
+    this.links = this.tree.links(this.nodes);
 
-   
-  this.transitionLinks();
-  this.transitionNodes();
-  this.isRoot() ? this.removeButtons() : this.addButtons();
-  
+    this.diagonal = d3.svg.diagonal()
+      .projection(function (d) {
+        return [d.y, d.x];
+    });  
 
-};
+    this.transitionLinks();
+    this.transitionNodes();
+    this.isRoot() ? this.removeButtons() : this.addButtons();
+    
+  },
 
-Tree.prototype.calcSize = function(depth) {
-  var sum = .5
-  var i = 2
+  calcSize: function(depth) {
+    var sum = .5
+    var i = 2
 
-  while(i < (depth)) {
-    sum += Math.pow(.5, i);
-    i++;
-  }
-    console.log(sum)
-  this.tree.size([400, 700*sum]);
-};
+    while(i < (depth)) {
+      sum += Math.pow(.5, i);
+      i++;
+    }
+      console.log(sum)
+    this.tree.size([400, 700*sum]);
+  },
 
-Tree.prototype.transitionLinks = function() {
+  transitionLinks: function() {
 
-  var link = this.svg.selectAll(".link")
-    .data(this.links, this.linkKey);
+    var link = this.svg.selectAll(".link")
+      .data(this.links, this.linkKey);
 
-  var self = this;  
+    var self = this;  
 
-  link  
-    .transition()
-    .duration(1000)  
-    .attr("d", function(d) {
-      if(self.isRoot()) {
-        var s = {x: d.source.x, y:  d.source.y }
-        var t = {x: d.target.x, y:  d.target.y }
-      } else {
-        var s = {x: d.source.x, y:  d.source.y + 75}
-        var t = {x: d.target.x, y:  d.target.y + 75}
-      }
-      return self.diagonal({source: s, target: t})
-    })
+    link  
+      .transition()
+      .duration(1000)  
+      .attr("d", function(d) {
+        if(self.isRoot()) {
+          var s = {x: d.source.x, y:  d.source.y }
+          var t = {x: d.target.x, y:  d.target.y }
+        } else {
+          var s = {x: d.source.x, y:  d.source.y + 75}
+          var t = {x: d.target.x, y:  d.target.y + 75}
+        }
+        return self.diagonal({source: s, target: t})
+      })
 
-  link
-    .exit()
-    .attr("d", function(d) {
-      if(self.isRoot()) {
-        var s = {x: d.source.x, y:  d.source.y }
-        var t = {x: d.target.x, y:  d.target.y }
-      } else {
-        var s = {x: d.source.x, y:  d.source.y + 75}
-        var t = {x: d.target.x, y:  d.target.y + 75}
-      }
-      return self.diagonal({source: s, target: t})
-    })
-    .remove();  
+    link
+      .exit()
+      .attr("d", function(d) {
+        if(self.isRoot()) {
+          var s = {x: d.source.x, y:  d.source.y }
+          var t = {x: d.target.x, y:  d.target.y }
+        } else {
+          var s = {x: d.source.x, y:  d.source.y + 75}
+          var t = {x: d.target.x, y:  d.target.y + 75}
+        }
+        return self.diagonal({source: s, target: t})
+      })
+      .remove();  
 
-  link
-    .enter() 
-    .append("path")
-    .attr("opacity", "0")
-    .transition()
-    .duration(1000) 
-    .delay(1000)  
-    .attr("opacity", "1")
-    .attr("class", "link")
-    .attr("fill", "none")
-    .attr("stroke", "gray")
-    .attr("d", function(d) {
-      if(self.isRoot()) {
-        var s = {x: d.source.x, y:  d.source.y }
-        var t = {x: d.target.x, y:  d.target.y }
-      } else {
-        var s = {x: d.source.x, y:  d.source.y + 75}
-        var t = {x: d.target.x, y:  d.target.y + 75}
-      }
-      return self.diagonal({source: s, target: t})
-    })
-}
+    link
+      .enter() 
+      .append("path")
+      .attr("opacity", "0")
+      .transition()
+      .duration(1000) 
+      .delay(1000)  
+      .attr("opacity", "1")
+      .attr("class", "link")
+      .attr("fill", "none")
+      .attr("stroke", "gray")
+      .attr("d", function(d) {
+        if(self.isRoot()) {
+          var s = {x: d.source.x, y:  d.source.y }
+          var t = {x: d.target.x, y:  d.target.y }
+        } else {
+          var s = {x: d.source.x, y:  d.source.y + 75}
+          var t = {x: d.target.x, y:  d.target.y + 75}
+        }
+        return self.diagonal({source: s, target: t})
+      })
+  },
 
-Tree.prototype.transitionNodes = function() {
+  transitionNodes: function() {
 
-  var node = this.svg.selectAll(".node")
-    .data(this.nodes, this.nodeKey);
+    var node = this.svg.selectAll(".node")
+      .data(this.nodes, this.nodeKey);
 
-  var self = this;  
-  node    
-    .enter()
-    .append("g")
-      .attr("class", "node")
+    var self = this;  
+    node    
+      .enter()
+      .append("g")
+        .attr("class", "node")
+        .attr("transform", function(d) {
+          return self.xTranslation(d);
+        })
+
+
+    node
+      .exit()
       .attr("transform", function(d) {
-        return self.xTranslation(d);
-      })
+          return self.xTranslation(d);
+        })
+      .remove();
 
+    node 
+      .transition()
+      .duration(1000)
+      .attr("transform", function(d) {
+          return self.xTranslation(d);
+        })
+      .attr("class", "node");
+   
+    var tree = this;
+    node.on("click", function(d) {
+      tree.data = d
+      tree.draw(d);
+      var future = $(".story-panel span.future").html();
+      $(".story-panel span.history").append(future);    
+      $(".story-panel span.future").text(" ");
+    });  
 
-  node
-    .exit()
-    .attr("transform", function(d) {
-        return self.xTranslation(d);
-      })
-    .remove();
+    node.on("mouseover", function(d){
+      // $(".story-panel span.history").html();
 
-  node 
-    .transition()
-    .duration(1000)
-    .attr("transform", function(d) {
-        return self.xTranslation(d);
-      })
-    .attr("class", "node");
- 
-  var tree = this;
-  node.on("click", function(d) {
-    tree.data = d
-    tree.draw(d);
-    var future = $(".story-panel span.future").html();
-    $(".story-panel span.history").append(future);    
-    $(".story-panel span.future").text(" ");
-  });  
+      $(".story-panel span.future").html(self.getRecentHistory(d));
+      console.log(self.data);
+      console.log("node was moused over");
+    })  
 
-  node.on("mouseover", function(d){
-    // $(".story-panel span.history").html();
+    node.append("circle")
+      .attr("r", 5)
+      .attr("fill", "#ccc");
 
-    $(".story-panel span.future").html(self.getRecentHistory(d));
-    console.log(self.data);
-    console.log("node was moused over");
-  })  
+    d3.selectAll("circle")
+      .on("mouseover", function() { 
+        console.log("circle was moused over");
+         d3.select(this)
+          .transition()
+          .duration(300)
+          .attr("r", 8);
+           })
+      .on("mouseout", function() { 
 
-  node.append("circle")
-    .attr("r", 5)
-    .attr("fill", "#ccc");
+         d3.select(this)
+          .transition()
+          .duration(300)
+          .attr("r", 5);
+           });  
 
-  d3.selectAll("circle")
-    .on("mouseover", function() { 
-      console.log("circle was moused over");
-       d3.select(this)
-        .transition()
-        .duration(300)
-        .attr("r", 8);
-         })
-    .on("mouseout", function() { 
+  },
 
-       d3.select(this)
-        .transition()
-        .duration(300)
-        .attr("r", 5);
-         });  
-
-}
-
-Tree.prototype.xTranslation = function(d) {
+  xTranslation: function(d) {
   
-  if(this.isRoot()) {
-   return "translate(" + d.y + "," + d.x + ")"; 
-  } else {
-   return "translate(" + (75 + d.y) + "," + d.x + ")"; 
+    if(this.isRoot()) {
+     return "translate(" + d.y + "," + d.x + ")"; 
+    } else {
+     return "translate(" + (75 + d.y) + "," + d.x + ")"; 
+    }
+  },
+
+  getHistory: function(d) {
+    var string = "";
+
+    while(d.parent !== undefined && d !== this.data) {
+      string = d.content + string;
+      d = d.parent;    
+    }
+
+    return string;
+  }, 
+
+  getOriginalHistory: function(d) {
+    var string = "";
+
+    while(d.parent !== undefined) {
+      string = d.content + string;
+      d = d.parent;    
+    }
+
+    return string;
+  },
+
+  getRecentHistory: function(d) {
+    var string = "";
+
+    while(d !== this.data) {
+      string = d.content + string;
+      d = d.parent;    
+    }
+
+    return string;
+  }, 
+
+  addButtons: function(d) {
+
+    var self = this;  
+
+    this.removeButtons();
+
+    var traverseUpButton = new TreeButton({x: this.data.x, y: this.data.y  + 50}, "one level up", this)
+    var resetButton = new TreeButton({x: this.data.x, y: this.data.y  + 25}, "reset to full tree", this)
+
+    var handler = function(beforeAction, history) {
+       beforeAction();
+       $(".story-panel span.history").text(context.masterData.content);
+       $(".story-panel span.history").append(history); 
+       $(".story-panel span.future").text("");
+    };
+
+    // traverseUpButton.on("click", function(d){
+    //   return handler(self.traverseUp, self.getOriginalHistory(self.data))
+    // });
+
+    traverseUpButton.on("click", function(d){
+      self.traverseUp();
+      $(".story-panel span.history").text(self.masterData.content);
+      $(".story-panel span.history").append(self.getOriginalHistory(self.data));    
+
+      $(".story-panel span.future").text("");
+      })
+
+    resetButton.on("click", function(d){
+      self.reset();
+      $(".story-panel span.history").text(self.masterData.content);    
+      $(".story-panel span.future").text("");
+      })
+
+     $(".controls").tooltip({container:'body'});
+
+  },
+
+  removeButtons: function(d) {
+    $(".controls").remove();
+    $(".tooltip").remove();
+  },
+
+  isRoot: function() {
+    return !!(this.data.parent === undefined) 
+  },
+
+  traverseUp: function() {
+    this.data = this.data.parent;
+    this.draw(this.data);
+  },
+
+  reset: function() {
+    this.data = this.masterData;
+    this.draw(this.data);
   }
 };
-
-Tree.prototype.getHistory = function(d) {
-  var string = "";
-
-  while(d.parent !== undefined && d !== this.data) {
-    string = d.content + string;
-    d = d.parent;    
-  }
-
-  return string;
-}; 
-
-Tree.prototype.getOriginalHistory = function(d) {
-  var string = "";
-
-  while(d.parent !== undefined) {
-    string = d.content + string;
-    d = d.parent;    
-  }
-
-  return string;
-}; 
-
-Tree.prototype.getRecentHistory = function(d) {
-  var string = "";
-
-  while(d !== this.data) {
-    string = d.content + string;
-    d = d.parent;    
-  }
-
-  return string;
-};  
-
-// Tree.prototype.getRelativeHistory = function(d) {
-//   var string = "";
-//   do {
-//     string = d.content + string;
-//     d = d.parent
-//   }
-//   while(d.parent !== undefined && d !== this.data);
-
-//   return string;
-// }; 
-
-Tree.prototype.addButtons = function(d) {
-
-  var self = this;  
-
-  this.removeButtons();
-
-  var traverseUpButton = this.svg.append("circle")
-    .attr("data-toggle","tooltip")
-    .attr("title","one level up")
-    .attr("data-placement","top")
-    .attr("cx", this.data.y + 50)
-    .attr("cy", this.data.x)
-    .attr("r", 5)
-    .attr("fill", "#ccc")
-    .attr("class", "controls");
-
-  var resetButton = this.svg.append("circle")
-    .attr("data-toggle","tooltip")
-    .attr("data-placement","top")
-    .attr("title","reset to full tree")
-    .attr("cx", this.data.y + 25)
-    .attr("cy", this.data.x)
-    .attr("r", 5)
-    .attr("fill", "#ccc")
-    .attr("class", "controls");
-
-  traverseUpButton.on("click", function(d){
-    self.traverseUp();
-    console.log(self);
-    $(".story-panel span.history").text(self.masterData.content);
-    $(".story-panel span.history").append(self.getOriginalHistory(self.data));    
-
-    $(".story-panel span.future").text("");
-    })
-
-  resetButton.on("click", function(d){
-    self.reset();
-    $(".story-panel span.history").text(self.masterData.content);    
-    $(".story-panel span.future").text("");
-    })
-
-   $(".controls").tooltip({container:'body'});
-
-};
-
-Tree.prototype.removeButtons = function(d) {
-  $(".controls").remove();
-  $(".tooltip").remove();
-}
-
-Tree.prototype.isRoot = function() {
-  if(this.data.parent === undefined) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-Tree.prototype.traverseUp = function() {
-  console.log("This is this" + this);
-  // console.log("This is self" + self);
-  this.data = this.data.parent;
-  this.draw(this.data);
-}
-
-Tree.prototype.reset = function() {
-  this.data = this.masterData;
-  this.draw(this.data);
-}
-
 
 function getDepth(obj) {
     var depth = 0;
@@ -317,7 +291,24 @@ function getDepth(obj) {
         })
     }
     return 1 + depth
-}
+};
+
+function TreeButton(placement, title, context, callback) {
+  var button = context.svg.append("circle")
+    .attr("data-toggle","tooltip")
+    .attr("title","one level up")
+    .attr("data-placement","top")
+    .attr("cx", placement.y)
+    .attr("cy", placement.x)
+    .attr("r", 5)
+    .attr("fill", "#ccc")
+    .attr("class", "controls");
+
+  if(callback) { callback(); }
+  
+  return button;  
+
+};
 
 $(document).ready(function () {
   
