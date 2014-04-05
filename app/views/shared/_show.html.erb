@@ -6,5 +6,5 @@
 <% end %>
   <h2><%= @history[:title] if @history[:title] %> 
 </h2>
-  <div class="content"><span class="history"><%= @history[:content] %> </span><span class="future"></span></div> 
+  <div class="content"><span class="history"><%= @history[:content].html_safe %>  </span><span class="future"></span></div> 
 </div>
