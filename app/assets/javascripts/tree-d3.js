@@ -23,7 +23,7 @@ Tree.prototype = {
 
   draw: function(data) {
     var depth = getDepth(this.data);
-    console.log(depth);
+    // console.log(depth);
     this.calcSize(depth);
 
     this.nodes = this.tree.nodes(data);
@@ -48,7 +48,7 @@ Tree.prototype = {
       sum += Math.pow(.5, i);
       i++;
     }
-      console.log(sum)
+      // console.log(sum)
     this.tree.size([400, 700*sum]);
   },
 
@@ -204,7 +204,14 @@ Tree.prototype = {
   getRecentHistory: function(d) {
     var string = "";
 
-    while(d !== this.data) {
+    // console.log("within recent history, d is")
+
+    while((d.content !== this.data.content) && (d.depth !== this.data.depth)) {
+      // console.log("This is d")
+      // console.log(d)
+      // console.log("This is this.data")
+      // console.log(this.data)
+      // console.log(d.content)
       string = d.content + string;
       d = d.parent;    
     }
@@ -293,10 +300,38 @@ function treeButton(placement, title, context, callback) {
 
 };
 
-$(document).ready(function () {
+var duration = 5000,
+    timer = setInterval(update, duration);
+
+function update() {
+  var current_branch = tree.data._id.$oid
+  console.log("Current branch is "+tree.data._id.$oid)
+
+  var link = window.location + ".json" + "?current_branch=" + current_branch
+  // console.log("Link within update function is " + link);
   
-  var link = window.location + ".json"
-  console.log(link);
+  d3.json(link, function(error, data) {
+    if (error) {
+      
+    }
+    else if(data) {
+      // tree = new Tree(data);
+      tree.draw(data); 
+      $(".story-panel").addClass("open");
+      $(".instruction").addClass("closed");
+    }  
+  });
+
+}
+
+$(document).ready(function () {
+  var tree_id_regex = new RegExp("trees/.*\.")
+  // console.log(window.location.href)
+  var tree_id = window.location.href.match(tree_id_regex)
+  var tree_id = tree_id[0].split("/")[1]
+
+  var link = window.location + ".json" + "?current_branch=" + tree_id
+  // console.log(link);
   d3.json(link, function(error, data) {
     if (error) {
       

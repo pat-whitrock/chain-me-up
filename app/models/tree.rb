@@ -54,8 +54,12 @@ class Tree
     user.save  
   end
 
-  def get_all_children
-    self.attributes
+  def get_all_children(branch_id)
+    if branch_id == self.id.to_s
+      self.attributes
+    else
+      self.find_branch_by({:id => branch_id}).attributes
+    end
   end
 
   def has_children?
