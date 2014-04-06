@@ -304,8 +304,10 @@ var duration = 5000,
     timer = setInterval(update, duration);
 
 function update() {
+  if (tree) {
   var current_branch = tree.data._id.$oid
   console.log("Current branch is "+tree.data._id.$oid)
+  }
 
   var link = window.location + ".json" + "?current_branch=" + current_branch
   // console.log("Link within update function is " + link);
@@ -328,13 +330,16 @@ $(document).ready(function () {
   var tree_id_regex = new RegExp("trees/.*\.")
   // console.log(window.location.href)
   var tree_id = window.location.href.match(tree_id_regex)
-  var tree_id = tree_id[0].split("/")[1]
+  if (tree_id)
+    {var tree_id = tree_id[0].split("/")[1]}
+  else
+    {var tree_id = ""}
 
   var link = window.location + ".json" + "?current_branch=" + tree_id
   // console.log(link);
   d3.json(link, function(error, data) {
     if (error) {
-      
+      tree = null
     }
     else if(data) {
       tree = new Tree(data);
