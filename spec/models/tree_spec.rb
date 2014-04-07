@@ -10,7 +10,7 @@ describe Tree do
     it "finds a branch by id" do
       child = tree.child_trees.build(:content => "And it continued as a legend")
       child.save
-      branch = tree.find_branch(child.id)
+      branch = tree.find_branch_by({:id => child.id})
       expect(branch).to be_a(Tree)
       expect(branch).to eq(child)
     end
@@ -36,7 +36,7 @@ describe Tree do
     it "returns the branch of a tree by user_id" do
       child = tree.child_trees.build(:content => "And it continued as a legend")
       child.bind_user(user)
-      expect(tree.find_branch_by_user(user.id.to_s)).to eq(child)
+      expect(tree.find_branch_by({:user_id => user.id.to_s})).to eq(child)
     end
   end
 
