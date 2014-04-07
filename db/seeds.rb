@@ -8,54 +8,54 @@
 
 # require 'benchmark'
 
-# sentences = %q(Call me Ishmael.
-# A screaming comes across the sky.
-# Lolita, light of my life, fire of my loins.
-# Happy families are all alike; every unhappy family is unhappy in its own way.
-# It was a bright cold day in April, and the clocks were striking thirteen.
-# I am an invisible man.
-# The sun shone, having no alternative, on the nothing new.
-# This is the saddest story I have ever heard.
-# Through the fence, between the curling flower spaces, I could see them hitting.
-# 124 was spiteful.
-# Mother died today.
-# Every summer Lin Kong returned to Goose Village to divorce his wife, Shuyu.
-# The sky above the port was the color of television, tuned to a dead channel.
-# I am a sick man . . . I am a spiteful man.
-# Where now? Who now? When now?
-# In a sense, I am Jacob Horner.
-# It was like so, but wasn't.
-# Mrs. Dalloway said she would buy the flowers herself.
-# All this happened, more or less.
-# They shoot the white girl first.
-# For a long time, I went to bed early.
-# The moment one learns English, complications set in.
-# Dr. Weiss, at forty, knew that her life had been ruined by literature.
-# Ships at a distance have every man's wish on board.
-# There was a boy called Eustace Clarence Scrubb, and he almost deserved it.
-# It was the day my grandmother exploded.
-# Elmer Gantry was drunk.
-# We started dying before the snow, and like the snow, we continued to fall.
-# It was a pleasure to burn.
-# In the beginning, sometimes I left messages in the street.
-# It was love at first sight.
-# I have never begun a novel with more misgiving.
-# You better not never tell nobody but God.
-# If I am out of my mind, it's all right with me, thought Moses Herzog.
-# When Dick Gibson was a little boy he was not Dick Gibson.
-# The past is a foreign country; they do things differently there.
-# I write this sitting in the kitchen sink.
-# He was born with a gift of laughter and a sense that the world was mad.
-# Psychics can see the color of time it's blue.
-# In the town, there were two mutes and they were always together.
-# Time is not a line but a dimension, like the dimensions of space.
-# They say when trouble comes close ranks, and so the white people did.)
+sentences = %q(Call me Ishmael.
+A screaming comes across the sky.
+Lolita, light of my life, fire of my loins.
+Happy families are all alike; every unhappy family is unhappy in its own way.
+It was a bright cold day in April, and the clocks were striking thirteen.
+I am an invisible man.
+The sun shone, having no alternative, on the nothing new.
+This is the saddest story I have ever heard.
+Through the fence, between the curling flower spaces, I could see them hitting.
+124 was spiteful.
+Mother died today.
+Every summer Lin Kong returned to Goose Village to divorce his wife, Shuyu.
+The sky above the port was the color of television, tuned to a dead channel.
+I am a sick man . . . I am a spiteful man.
+Where now? Who now? When now?
+In a sense, I am Jacob Horner.
+It was like so, but wasn't.
+Mrs. Dalloway said she would buy the flowers herself.
+All this happened, more or less.
+They shoot the white girl first.
+For a long time, I went to bed early.
+The moment one learns English, complications set in.
+Dr. Weiss, at forty, knew that her life had been ruined by literature.
+Ships at a distance have every man's wish on board.
+There was a boy called Eustace Clarence Scrubb, and he almost deserved it.
+It was the day my grandmother exploded.
+Elmer Gantry was drunk.
+We started dying before the snow, and like the snow, we continued to fall.
+It was a pleasure to burn.
+In the beginning, sometimes I left messages in the street.
+It was love at first sight.
+I have never begun a novel with more misgiving.
+You better not never tell nobody but God.
+If I am out of my mind, it's all right with me, thought Moses Herzog.
+When Dick Gibson was a little boy he was not Dick Gibson.
+The past is a foreign country; they do things differently there.
+I write this sitting in the kitchen sink.
+He was born with a gift of laughter and a sense that the world was mad.
+Psychics can see the color of time it's blue.
+In the town, there were two mutes and they were always together.
+Time is not a line but a dimension, like the dimensions of space.
+They say when trouble comes close ranks, and so the white people did.)
 
-# sentences = sentences.split("\n")
+sentences = sentences.split("\n")
 
-# sentences.each do |quote|
-#   Prompt.create(:content => quote)
-# end
+sentences.each do |quote|
+  Prompt.create(:content => quote)
+end
 
 user = User.last
 tree_one = Tree.new(:content => "Tumblr you probably haven't heard of them Intelligentsia. ", :title => "A visualization")
