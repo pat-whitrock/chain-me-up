@@ -34,6 +34,7 @@ end
 group :test do
   gem "timecop"
   gem "rack_session_access"
+  gem 'simplecov'
 end
 
 # db driver for mongodb
